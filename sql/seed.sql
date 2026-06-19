@@ -1,0 +1,174 @@
+-- ÉCLAT — Hair Atelier · seed data
+-- Images use placeholder CDNs (i.pravatar.cc faces, picsum.photos editorial
+-- shots) so the demo always renders. Every image is a single DB field —
+-- swap in real Unsplash or the salon's own photos by editing image_url / photo_url.
+
+SET NAMES utf8mb4;
+
+-- ---- Settings ------------------------------------------------------------
+INSERT INTO settings (skey, svalue) VALUES
+('site_name',        'ÉCLAT'),
+('site_name_full',   'ÉCLAT — Hair Atelier'),
+('tagline',          'The art of beautiful hair'),
+('currency_symbol',  '$'),
+('founded_year',     '2009'),
+('phone',            '+1 (212) 555-0148'),
+('whatsapp',         '12125550148'),
+('email',            'studio@eclat-atelier.com'),
+('address_line1',    '118 Greene Street, SoHo'),
+('address_line2',    'New York, NY 10012'),
+('instagram',        'https://instagram.com/eclat.atelier'),
+('facebook',         'https://facebook.com/eclatatelier'),
+('tiktok',           'https://tiktok.com/@eclat.atelier'),
+('youtube',          'https://youtube.com/@eclatatelier'),
+('hero_eyebrow',     'Est. 2009 · Award-winning atelier'),
+('hero_title',       'Hair, considered as craft.'),
+('hero_lead',        'A SoHo atelier where master colourists and cutters turn a single appointment into the look you have been picturing for years.'),
+('about_eyebrow',    'The house of ÉCLAT'),
+('about_title',      'Sixteen years of quiet, deliberate transformation'),
+('about_p1',         'ÉCLAT began in 2009 as a two-chair studio with one belief: that great hair is not a service you buy but a craft you commission. Today our atelier brings together colourists, cutters and texture specialists who treat every head of hair as its own brief.'),
+('about_p2',         'We keep the room small on purpose. Fewer chairs means longer appointments, undivided attention, and the kind of result that has guests travelling across the city — and occasionally across an ocean — to sit in our chairs.'),
+('booking_note',     'Appointments are confirmed within one business day. For same-day requests, call the studio.');
+
+-- ---- Opening hours -------------------------------------------------------
+INSERT INTO opening_hours (day_order, day_name, open_time, close_time, is_closed) VALUES
+(1, 'Monday',    NULL,       NULL,       1),
+(2, 'Tuesday',   '10:00:00', '20:00:00', 0),
+(3, 'Wednesday', '10:00:00', '20:00:00', 0),
+(4, 'Thursday',  '10:00:00', '21:00:00', 0),
+(5, 'Friday',    '10:00:00', '21:00:00', 0),
+(6, 'Saturday',  '09:00:00', '18:00:00', 0),
+(7, 'Sunday',    '10:00:00', '16:00:00', 0);
+
+-- ---- Stats (homepage counters) ------------------------------------------
+INSERT INTO stats (label, value, prefix, suffix, sort_order) VALUES
+('Years of artistry',  16,    '',  '',  1),
+('Guests transformed', 12000, '',  '+', 2),
+('Master stylists',    8,     '',  '',  3),
+('Five-star reviews',  2400,  '',  '+', 4),
+('Industry awards',    14,    '',  '',  5);
+
+-- ---- Service categories --------------------------------------------------
+INSERT INTO service_categories (id, name, slug, blurb, sort_order) VALUES
+(1, 'Cut & Style',     'cut-style',   'Precision shapes and finishes, tailored to how you actually wear your hair.', 1),
+(2, 'Colour',          'colour',      'From lived-in balayage to bold creative colour, built by hand.',            2),
+(3, 'Treatments',      'treatments',  'Repair, smooth and restore — the health work behind every great look.',     3),
+(4, 'Bridal & Events', 'bridal',      'Trials, day-of styling and occasion hair for the moments that matter.',      4),
+(5, 'Men''s Grooming', 'mens',        'Sharp cuts, fades and beard work, with the same care as everything else.',  5);
+
+-- ---- Services ------------------------------------------------------------
+INSERT INTO services (category_id, name, description, price_from, price_to, duration_min, is_featured, sort_order) VALUES
+(1, 'Precision Cut & Finish',        'A consultation, precision cut and a polished blow-dry finish.',                 75,  120, 60,  0, 1),
+(1, 'Restyle & Consultation',        'For a real change — extended consultation, restyle and styling lesson.',       95,  150, 90,  0, 2),
+(1, 'Blow-Dry & Styling',            'Wash, blow-dry and styling for everyday polish or a night out.',               55,  85,  45,  0, 3),
+(1, 'Curl & Wave Styling',           'Heat or set styling that works with your natural texture, not against it.',    65,  95,  60,  0, 4),
+
+(2, 'Full Balayage',                 'Hand-painted, lived-in colour with a tailored toner and finish.',              220, 360, 180, 1, 1),
+(2, 'Signature Highlights',          'Foil work for dimension and brightness, placed to suit your cut.',             180, 300, 150, 1, 2),
+(2, 'Creative / Fashion Colour',     'Vivids, bold blocking and bespoke colour design.',                             250, 450, 210, 0, 3),
+(2, 'Full-Head Colour',              'Even, glossy single-process colour from root to tip.',                         130, 190, 120, 0, 4),
+(2, 'Root & Gloss Refresh',          'A regrowth touch-up and a shine-boosting gloss between full appointments.',     95,  140, 90,  0, 5),
+
+(3, 'Olaplex Bond Repair',           'Rebuilds broken bonds for stronger, healthier hair. Add to any service.',      60,  90,  45,  0, 1),
+(3, 'Keratin Smoothing',             'Tames frizz and cuts styling time for months. Built to your hair type.',       180, 320, 150, 1, 2),
+(3, 'Scalp & Hydration Ritual',      'A deep-cleansing scalp treatment and intensive moisture mask.',                70,  110, 60,  0, 3),
+(3, 'Gloss & Shine Treatment',       'A quick, mirror-shine top-up that refreshes tone and condition.',              50,  80,  30,  0, 4),
+
+(4, 'Bridal Hair — Trial & Day',     'A pre-wedding trial plus styling on the day, start to veil.',                  350, 550, NULL,1, 1),
+(4, 'Event Updo',                    'A bespoke updo for galas, parties and red-carpet moments.',                    95,  160, 75,  0, 2),
+(4, 'Occasion Blow-Dry',             'A long-lasting, camera-ready blow-dry for any special event.',                 65,  95,  45,  0, 3),
+
+(5, 'Men''s Cut & Style',            'Consultation, scissor or clipper cut, and a styling finish.',                  55,  85,  45,  0, 1),
+(5, 'Skin Fade & Detail',            'A crisp, blended fade with precise detailing and a hot-towel finish.',         60,  90,  50,  0, 2),
+(5, 'Beard Sculpt',                  'Beard shaping, line-up and conditioning. Pairs well with a cut.',              35,  55,  30,  0, 3);
+
+-- ---- Team ----------------------------------------------------------------
+INSERT INTO team (name, role, specialty, bio, photo_url, instagram, years_exp, is_owner, sort_order) VALUES
+('Camille Léon',     'Founder & Creative Director', 'Editorial colour & atelier direction',
+ 'Camille opened ÉCLAT in 2009 after a decade between Paris and New York runway teams. She still takes a handful of colour clients each week.',
+ 'https://i.pravatar.cc/640?img=5',  '@camille.eclat', 22, 1, 1),
+('Mara Voss',        'Master Colourist',            'Balayage, blonding & colour correction',
+ 'Mara is our go-to for the most delicate blonding and correction work — the appointments other salons turn away.',
+ 'https://i.pravatar.cc/640?img=9',  '@mara.colour',   14, 0, 2),
+('Theo Almeida',     'Senior Stylist',              'Precision cutting & restyles',
+ 'Theo''s cuts are architectural — built to grow out beautifully and fall back into shape every morning.',
+ 'https://i.pravatar.cc/640?img=12', '@theo.cuts',     12, 0, 3),
+('Yuki Tanaka',      'Master Stylist',              'Curls, coils & textured hair',
+ 'A texture specialist who shapes curls dry, Yuki has a waitlist of guests who finally feel seen.',
+ 'https://i.pravatar.cc/640?img=16', '@yuki.texture',  11, 0, 4),
+('Sofia Marchetti',  'Colour Specialist',           'Creative & fashion colour',
+ 'From soft money-piece to full vivids, Sofia treats colour as design. Nothing is off the table.',
+ 'https://i.pravatar.cc/640?img=20', '@sofia.colour',  9,  0, 5),
+('Daniel Okafor',    'Senior Barber',               'Men''s grooming, fades & beards',
+ 'Daniel brought barbering precision into the atelier — fades and beard work with a tailor''s patience.',
+ 'https://i.pravatar.cc/640?img=33', '@daniel.cuts',   10, 0, 6),
+('Elena Rossi',      'Bridal Specialist',           'Updos & occasion styling',
+ 'Elena has styled more than four hundred weddings. Calm under pressure, flawless under a veil.',
+ 'https://i.pravatar.cc/640?img=24', '@elena.bridal',  13, 0, 7),
+('Noah Bennett',     'Stylist',                     'Cutting & everyday styling',
+ 'Noah trained in-house at ÉCLAT and brings a fresh, modern eye to classic cuts and blow-dries.',
+ 'https://i.pravatar.cc/640?img=51', '@noah.style',    7,  0, 8);
+
+-- ---- Gallery categories --------------------------------------------------
+INSERT INTO gallery_categories (id, name, slug, sort_order) VALUES
+(1, 'Colour',   'colour',   1),
+(2, 'Cuts',     'cuts',     2),
+(3, 'Balayage', 'balayage', 3),
+(4, 'Updos',    'updos',    4),
+(5, 'Bridal',   'bridal',   5),
+(6, 'Men''s',   'mens',     6);
+
+-- ---- Gallery (image_url + optional before_image_url for the reveal) ------
+INSERT INTO gallery (category_id, title, image_url, before_image_url, stylist_id, is_featured, sort_order) VALUES
+(3, 'Lived-in bronde balayage',  'https://picsum.photos/seed/eclat-g1/900/1100',  'https://picsum.photos/seed/eclat-g1b/900/1100?grayscale', 2, 1, 1),
+(1, 'Soft copper melt',          'https://picsum.photos/seed/eclat-g2/900/1100',  NULL, 5, 1, 2),
+(2, 'Blunt collarbone bob',      'https://picsum.photos/seed/eclat-g3/900/1100',  'https://picsum.photos/seed/eclat-g3b/900/1100?grayscale', 3, 1, 3),
+(5, 'Romantic bridal half-up',   'https://picsum.photos/seed/eclat-g4/900/1100',  NULL, 7, 1, 4),
+(1, 'Icy platinum blonde',       'https://picsum.photos/seed/eclat-g5/900/1100',  'https://picsum.photos/seed/eclat-g5b/900/1100?grayscale', 2, 1, 5),
+(4, 'Sculpted evening updo',     'https://picsum.photos/seed/eclat-g6/900/1100',  NULL, 7, 0, 6),
+(6, 'Textured crop & skin fade', 'https://picsum.photos/seed/eclat-g7/900/1100',  NULL, 6, 0, 7),
+(2, 'Long layered restyle',      'https://picsum.photos/seed/eclat-g8/900/1100',  NULL, 3, 0, 8),
+(3, 'Honey-dimensional balayage','https://picsum.photos/seed/eclat-g9/900/1100',  NULL, 5, 0, 9),
+(2, 'Natural curl shaping',      'https://picsum.photos/seed/eclat-g10/900/1100', NULL, 4, 0, 10),
+(1, 'Rich brunette gloss',       'https://picsum.photos/seed/eclat-g11/900/1100', NULL, 5, 0, 11),
+(6, 'Classic gentleman''s cut',  'https://picsum.photos/seed/eclat-g12/900/1100', NULL, 6, 0, 12);
+
+-- ---- Testimonials --------------------------------------------------------
+INSERT INTO testimonials (author, rating, quote, service, source, sort_order) VALUES
+('Priya N.',     5, 'I have spent years and a small fortune trying to get my blonde right. Mara fixed it in one appointment. I actually cried a little.', 'Colour correction', 'Google',    1),
+('James W.',     5, 'Theo is the first person in a decade who cut my hair and it still looked good a month later. I will not go anywhere else.',            'Precision Cut',    'Google',    2),
+('Aaliyah R.',   5, 'They understood my curls without me having to explain or apologise. Yuki is a genius and the room feels like a calm little sanctuary.', 'Curl shaping',     'Instagram', 3),
+('Sofia & Marc', 5, 'Elena did my bridal trial and the day-of styling. It survived rain, tears and a ten-hour party. Flawless from first photo to last.',  'Bridal Hair',      'Google',    4),
+('Daniel K.',    5, 'Booked on a whim for a fade and a beard tidy. Best grooming experience I have had — proper consultation, no rush, perfect result.',     'Skin Fade',        'Google',    5),
+('Hana T.',      5, 'The balayage is the most natural I have ever had. Six weeks on and it is still gorgeous. Worth every cent and the trip downtown.',       'Full Balayage',    'Instagram', 6);
+
+-- ---- Brands (marquee) ----------------------------------------------------
+INSERT INTO brands (name, sort_order) VALUES
+('Olaplex', 1), ('Kérastase', 2), ('Wella Professionals', 3), ('L''Oréal Professionnel', 4),
+('Davines', 5), ('Oribe', 6), ('Redken', 7), ('K18', 8);
+
+-- ---- Sample booking enquiries (so the future dashboard has data) ---------
+INSERT INTO booking_requests (name, email, phone, service_id, preferred_date, message, created_at) VALUES
+('Maya Donovan', 'maya.d@example.com', '+1 (212) 555-0192', 5, '2026-06-24', 'Would love to go a few shades lighter for summer — open to your recommendation.', '2026-06-15 14:22:00'),
+('Tom Reyes',    'treyes@example.com', '+1 (646) 555-0110', 18, '2026-06-21', 'First time — looking for a fresh fade before a wedding.', '2026-06-16 09:05:00');
+
+-- =========================================================================
+-- TODO / FUTURE seed data (tables exist but are not wired to any page yet)
+-- =========================================================================
+INSERT INTO faq (question, answer, sort_order) VALUES
+('Do I need a consultation before a colour appointment?', 'For first-time colour, big changes or corrections, yes — we book a short consultation (often same visit) so your stylist can plan properly. For maintenance, it is built into your appointment.', 1),
+('What is your cancellation policy?', 'We ask for 48 hours'' notice so we can offer the slot to someone on the waitlist. Late cancellations may incur a fee.', 2),
+('How long does balayage last?', 'Because it is hand-painted and grows out softly, most guests return every 10–14 weeks, with a gloss refresh in between.', 3);
+
+INSERT INTO posts (title, slug, excerpt, body, cover_url, author, published_at, is_published) VALUES
+('How to make your balayage last longer', 'make-balayage-last', 'Five habits that keep hand-painted colour looking fresh for months.', 'Full article body goes here.', 'https://picsum.photos/seed/eclat-post1/1200/700', 'Mara Voss', '2026-05-02 10:00:00', 1);
+
+INSERT INTO products (name, brand, description, price, image_url, sort_order) VALUES
+('No.3 Hair Perfector', 'Olaplex', 'At-home bond-building treatment to use between appointments.', 30.00, 'https://picsum.photos/seed/eclat-prod1/600/600', 1),
+('Bain Satin Shampoo',  'Kérastase', 'Nourishing shampoo for normal to dry hair.', 38.00, 'https://picsum.photos/seed/eclat-prod2/600/600', 2);
+
+INSERT INTO promotions (title, detail, cta_label, cta_url, is_active, sort_order) VALUES
+('20% off your first colour', 'New guests save 20% on any colour service with a master colourist this season.', 'Book now', '/book', 1, 1);
+
+INSERT INTO gift_vouchers (code, amount, purchaser, recipient, created_at) VALUES
+('ECLAT-GIFT-DEMO', 150.00, 'Demo Purchaser', 'Demo Recipient', '2026-06-01 12:00:00');

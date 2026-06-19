@@ -1,0 +1,50 @@
+/* Buttons + text links. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1.05em 1.9em;
+  border-radius: var(--radius);
+  transition: background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { background: var(--accent-2); }
+
+.btn-ghost {
+  border: 1px solid var(--line-2);
+  color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-on-image {
+  border: 1px solid rgba(255,255,255,0.5);
+  color: #fff;
+}
+.btn-on-image:hover { background: #fff; color: #111; border-color: #fff; }
+
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line-2);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.btn-text .arrow { transition: transform var(--dur-fast) var(--ease); color: var(--accent); }
+.btn-text:hover { color: var(--accent); border-color: var(--accent); }
+.btn-text:hover .arrow { transform: translateX(5px); }

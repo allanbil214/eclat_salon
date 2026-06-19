@@ -1,0 +1,21 @@
+# ----------------------------------------------------------------------------
+# Shared-hosting forwarder (Hostinger / LiteSpeed / Apache).
+#
+# Upload this whole folder to:  public_html/test/
+# This file makes  https://jmep.online/test/  serve the app's  public/  folder,
+# WITHOUT touching the project structure. Your app/, config/ and sql/ folders
+# are not reachable through the browser because everything is funnelled here.
+#
+# When you later run your own nginx, DELETE this file and point the server root
+# at the  public/  folder instead (and set BASE_URL to '' in config/config.php).
+#
+# If you put the project in a folder other than "test", change /test/ below
+# and BASE_URL in config/config.php to match.
+# ----------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Don't re-forward requests that are already inside public/.
+    RewriteCond %{REQUEST_URI} !^/test/public/
+    RewriteRule ^(.*)$ /test/public/$1 [L]
+</IfModule>

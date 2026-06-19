@@ -1,0 +1,64 @@
+/* ÉCLAT · design tokens — dark is default, light overrides below. */
+:root {
+  /* type */
+  --font-display: "Bodoni Moda", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  --fs-eyebrow: 0.72rem;
+  --fs-body: 1.02rem;
+  --fs-lead: clamp(1.12rem, 0.6rem + 1.1vw, 1.4rem);
+  --h4: clamp(1.05rem, 0.9rem + 0.6vw, 1.3rem);
+  --h3: clamp(1.4rem, 1rem + 1.4vw, 2rem);
+  --h2: clamp(2.05rem, 1.2rem + 3.4vw, 3.4rem);
+  --h1: clamp(2.9rem, 1.2rem + 7vw, 6rem);
+
+  /* spacing / layout */
+  --container: 1220px;
+  --container-narrow: 880px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --section-y: clamp(72px, 9vw, 150px);
+  --radius: 3px;
+  --radius-lg: 6px;
+
+  /* motion (slow + eased = luxe) */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --dur: 0.65s;
+  --dur-fast: 0.28s;
+}
+
+/* ---- Dark (default) ---- */
+:root,
+[data-theme="dark"] {
+  --bg: #0c0b0e;
+  --bg-2: #131116;
+  --bg-3: #1b181f;
+  --text: #f2ede4;
+  --text-2: #b3aca1;
+  --text-3: #7d766c;
+  --line: #29242f;
+  --line-2: #3a3442;
+  --accent: #c9a86a;
+  --accent-2: #e2c993;
+  --accent-ink: #0c0b0e;
+  --overlay: linear-gradient(180deg, rgba(8,7,10,0.25) 0%, rgba(8,7,10,0.72) 100%);
+  --shadow: 0 24px 60px -28px rgba(0,0,0,0.7);
+  --img-filter: grayscale(0.15) contrast(1.02);
+}
+
+/* ---- Light (warm, still premium) ---- */
+[data-theme="light"] {
+  --bg: #f4efe6;
+  --bg-2: #fbf8f1;
+  --bg-3: #ffffff;
+  --text: #191510;
+  --text-2: #5d554a;
+  --text-3: #8b8276;
+  --line: #e6ddce;
+  --line-2: #d8cdb8;
+  --accent: #9a7637;
+  --accent-2: #b79150;
+  --accent-ink: #fbf8f1;
+  --overlay: linear-gradient(180deg, rgba(26,20,12,0.10) 0%, rgba(26,20,12,0.5) 100%);
+  --shadow: 0 24px 50px -30px rgba(60,45,20,0.35);
+  --img-filter: none;
+}
