@@ -1,7 +1,7 @@
 <?php /** Services page. Vars: $menu (categories with ->items) */ ?>
 
 <section class="page-hero">
-    <div class="page-hero-bg"><img src="https://picsum.photos/seed/eclat-svc-hero/1920/1000" alt="" aria-hidden="true"></div>
+    <div class="page-hero-bg"><img src="<?= e(url('assets/img/hero/services-hero.jpg')) ?>" alt="" aria-hidden="true"></div>
     <div class="container">
         <span class="eyebrow">Services &amp; pricing</span>
         <h1>The menu</h1>

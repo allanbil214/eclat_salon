@@ -9,7 +9,7 @@ $tt = get_setting('tiktok');    $yt = get_setting('youtube');
         <div class="footer-top">
             <div class="footer-brand">
                 <div class="brand"><?= e(get_setting('site_name')) ?><span class="dot">.</span></div>
-                <p><?= e(get_setting('tagline')) ?> — a SoHo atelier, by appointment since <?= e(get_setting('founded_year')) ?>.</p>
+                <p><?= e(get_setting('tagline')) ?> — a Jakarta atelier, by appointment since <?= e(get_setting('founded_year')) ?>.</p>
                 <div class="socials">
                     <a href="<?= e($ig) ?>" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
                     <a href="<?= e($fb) ?>" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h2.7l.4-3H13V9c0-.9.3-1.5 1.6-1.5H16V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9V11H7v3h3v8z"/></svg></a>
@@ -53,7 +53,7 @@ $tt = get_setting('tiktok');    $yt = get_setting('youtube');
 
         <div class="footer-bottom">
             <span>© <?= date('Y') ?> <?= e(get_setting('site_name_full')) ?>. All rights reserved.</span>
-            <span>Crafted in SoHo · A demo template</span>
+            <span>Crafted in Jakarta · A demo template</span>
         </div>
     </div>
 </footer>

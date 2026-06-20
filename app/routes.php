@@ -11,4 +11,5 @@ return [
     '/services' => 'services',
     '/gallery'  => 'gallery',
     '/book'     => 'book',
+    '/booked'   => 'booked',
 ];

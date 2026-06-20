@@ -1,11 +1,10 @@
-<?php /** Book page. Vars: $services $hours $errors $success $old */
+<?php /** Book page. Vars: $services $hours $errors $old */
 $errors  = $errors  ?? [];
-$success = $success ?? false;
 $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id' => '', 'preferred_date' => '', 'message' => ''];
 ?>
 
 <section class="page-hero">
-    <div class="page-hero-bg"><img src="https://picsum.photos/seed/eclat-book-hero/1920/1000" alt="" aria-hidden="true"></div>
+    <div class="page-hero-bg"><img src="<?= e(url('assets/img/hero/book-hero.jpg')) ?>" alt="" aria-hidden="true"></div>
     <div class="container">
         <span class="eyebrow">Appointments</span>
         <h1>Request your appointment</h1>
@@ -17,12 +16,7 @@ $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id'
 <section class="section">
     <div class="container book-grid">
         <div class="reveal">
-            <?php if ($success): ?>
-                <div class="alert ok">
-                    <strong>Thank you — your request is in.</strong><br>
-                    We will confirm by email within one business day. For anything urgent, call the studio on <?= e(get_setting('phone')) ?>.
-                </div>
-            <?php elseif ($errors): ?>
+            <?php if ($errors): ?>
                 <div class="alert err">Please check the highlighted fields and try again.</div>
             <?php endif; ?>
 
@@ -64,7 +58,7 @@ $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id'
                     </div>
                     <div class="field full">
                         <button class="btn btn-primary" type="submit">Send request <span aria-hidden="true">→</span></button>
-                        <p class="form-note">We will never share your details. This sends an enquiry — your stylist confirms the final time.</p>
+                        <p class="form-note">We'll save your request and open WhatsApp so you can confirm with the studio in one tap.</p>
                     </div>
                 </div>
             </form>

@@ -1,0 +1,41 @@
+/* Booking confirmation page. */
+.booked {
+  min-height: 86vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-top: 150px;
+  padding-bottom: var(--section-y);
+}
+.booked-check {
+  width: 76px; height: 76px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: grid; place-items: center;
+  box-shadow: var(--shadow);
+  animation: bookedPop 0.6s var(--ease) both;
+}
+.booked-check svg { width: 36px; height: 36px; }
+@keyframes bookedPop { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+
+.booked .eyebrow { margin-bottom: 20px; }
+.booked h1 { margin-bottom: 0.4em; }
+.booked .lede { max-width: 52ch; margin: 0 auto; }
+
+.booked-countdown {
+  margin-top: 32px;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.booked-countdown .secs { color: var(--accent); font-weight: 700; }
+
+.booked-actions {
+  margin-top: 24px;
+  display: flex; flex-wrap: wrap; gap: 18px;
+  align-items: center; justify-content: center;
+}
+.booked-note { margin-top: 22px; font-size: 0.82rem; color: var(--text-3); }

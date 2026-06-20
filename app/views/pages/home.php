@@ -1,7 +1,7 @@
 <?php /** Home page. Vars from HomeController: $stats $featured $transformations $team $gallery $testimonials */ ?>
 
 <section class="hero">
-    <div class="hero-bg"><img src="https://picsum.photos/seed/eclat-hero/1920/1200" alt="" aria-hidden="true"></div>
+    <div class="hero-bg"><img src="<?= e(url('assets/img/hero/home-hero.jpg')) ?>" alt="" aria-hidden="true"></div>
     <div class="container hero-inner">
         <span class="eyebrow"><?= e(get_setting('hero_eyebrow')) ?></span>
         <h1><?= e(get_setting('hero_title')) ?></h1>
@@ -24,10 +24,10 @@
 <section class="section">
     <div class="container intro-split">
         <div class="intro-figure reveal">
-            <div class="main"><img src="https://picsum.photos/seed/eclat-about/900/1100" alt="Inside the ÉCLAT atelier" loading="lazy"></div>
+            <div class="main"><img src="<?= e(url('assets/img/home/intro.jpg')) ?>" alt="Inside the ÉCLAT atelier" loading="lazy"></div>
             <div class="badge">
                 <div class="n"><?= (int) (date('Y') - (int) get_setting('founded_year')) ?></div>
-                <div class="l">Years in SoHo</div>
+                <div class="l">Years in Jakarta</div>
             </div>
         </div>
         <div class="intro-copy reveal" style="--d:.1s">
@@ -89,8 +89,8 @@
                     <div class="ba" style="--pos:50%">
                         <span class="tag before">Before</span>
                         <span class="tag after">After</span>
-                        <img class="before" src="<?= e($t['before_image_url']) ?>" alt="Before">
-                        <img class="after" src="<?= e($t['image_url']) ?>" alt="After: <?= e($t['title']) ?>">
+                        <img class="before" src="<?= e(image($t['before_image_url'])) ?>" alt="Before">
+                        <img class="after" src="<?= e(image($t['image_url'])) ?>" alt="After: <?= e($t['title']) ?>">
                         <div class="handle"><span class="grip" aria-hidden="true">⇄</span></div>
                     </div>
                     <div class="ba-caption">
@@ -131,7 +131,7 @@
         <div class="grid grid-3">
             <?php foreach ($gallery as $i => $g): ?>
                 <a class="tile reveal" href="<?= e(url('gallery')) ?>" style="--d:<?= number_format(($i % 3) * 0.06, 2) ?>s">
-                    <img src="<?= e($g['image_url']) ?>" alt="<?= e($g['title']) ?>" loading="lazy">
+                    <img src="<?= e(image($g['image_url'])) ?>" alt="<?= e($g['title']) ?>" loading="lazy">
                     <span class="meta">
                         <span class="cat"><?= e($g['category_name']) ?></span>
                         <span class="ttl"><?= e($g['title']) ?></span>

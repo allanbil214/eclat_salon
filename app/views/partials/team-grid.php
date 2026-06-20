@@ -4,7 +4,7 @@ $members = $members ?? []; ?>
     <?php foreach ($members as $i => $m): ?>
         <article class="team-card reveal" style="--d: <?= number_format($i * 0.06, 2) ?>s">
             <div class="photo">
-                <img src="<?= e($m['photo_url']) ?>" alt="<?= e($m['name'] . ' — ' . $m['role']) ?>" loading="lazy">
+                <img src="<?= e(image($m['photo_url'])) ?>" alt="<?= e($m['name'] . ' — ' . $m['role']) ?>" loading="lazy">
                 <?php if ($m['instagram']): ?>
                     <span class="ig"><?= e($m['instagram']) ?> <span aria-hidden="true">↗</span></span>
                 <?php endif; ?>

@@ -5,7 +5,7 @@
 .intro-figure .main { aspect-ratio: 4 / 5; border-radius: var(--radius-lg); overflow: hidden; }
 .intro-figure .main img { width: 100%; height: 100%; object-fit: cover; filter: var(--img-filter); }
 .intro-figure .badge { position: absolute; right: -18px; bottom: 30px; background: var(--accent); color: var(--accent-ink); padding: 22px 26px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); }
-.intro-figure .badge .n { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; line-height: 1; }
+.intro-figure .badge .n { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; line-height: 1; }
 .intro-figure .badge .l { font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px; }
 @media (max-width: 880px) { .intro-figure .badge { right: 16px; } }
 .intro-copy h2 { margin-bottom: 0.6em; }
@@ -17,7 +17,7 @@
 .svc-feature:first-child { border-top: 1px solid var(--line); }
 .svc-feature:hover { padding-left: 12px; }
 .svc-feature .ix { font-family: var(--font-display); font-size: 1rem; color: var(--text-3); }
-.svc-feature .nm { font-family: var(--font-display); font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 600; }
+.svc-feature .nm { font-family: var(--font-display); font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 400; }
 .svc-feature .nm small { display: block; font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-top: 6px; }
 .svc-feature .pr { font-family: var(--font-display); color: var(--accent); font-size: 1.15rem; white-space: nowrap; }
 @media (max-width: 620px) { .svc-feature .ix { display: none; } .svc-feature { grid-template-columns: 1fr auto; } }

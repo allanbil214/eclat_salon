@@ -1,7 +1,7 @@
 <?php /** About page. Vars: $team $stats $values */ ?>
 
 <section class="page-hero">
-    <div class="page-hero-bg"><img src="https://picsum.photos/seed/eclat-about-hero/1920/1000" alt="" aria-hidden="true"></div>
+    <div class="page-hero-bg"><img src="<?= e(url('assets/img/hero/about-hero.jpg')) ?>" alt="" aria-hidden="true"></div>
     <div class="container">
         <span class="eyebrow"><?= e(get_setting('about_eyebrow')) ?></span>
         <h1>The atelier behind the chair</h1>
@@ -20,8 +20,8 @@
             <a class="btn-text" href="<?= e(url('book')) ?>" style="margin-top:32px">Book with us <span class="arrow" aria-hidden="true">→</span></a>
         </div>
         <div class="stack reveal" style="--d:.1s">
-            <img class="tall" src="https://picsum.photos/seed/eclat-story1/900/1200" alt="The ÉCLAT studio" loading="lazy">
-            <img class="wide" src="https://picsum.photos/seed/eclat-story2/1200/750" alt="A stylist at work" loading="lazy">
+            <img class="tall" src="<?= e(url('assets/img/about/story-1.jpg')) ?>" alt="The ÉCLAT studio" loading="lazy">
+            <img class="wide" src="<?= e(url('assets/img/about/story-2.jpg')) ?>" alt="A stylist at work" loading="lazy">
         </div>
     </div>
 </section>

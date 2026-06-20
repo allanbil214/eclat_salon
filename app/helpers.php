@@ -15,6 +15,16 @@ function url(string $path = ''): string {
 }
 
 /**
+ * Resolve an image source. External URLs (http…) pass through untouched;
+ * local paths get the BASE_URL prefix so they work in a subfolder.
+ */
+function image(string $path): string {
+    if ($path === '') return '';
+    if (preg_match('#^https?://#i', $path)) return $path;
+    return url(ltrim($path, '/'));
+}
+
+/**
  * Cache-busting version stamp for an asset (its last-modified time).
  * Swap a file and the URL changes automatically — no manual versioning,
  * and the browser never serves a stale copy.
@@ -38,10 +48,11 @@ function js(string $name): string {
         . '?v=' . asset_version($rel) . '"></script>';
 }
 
-/** Format a price the way a salon menu does. */
+/** Format a price the way a salon menu does (e.g. "Rp 1.500.000"). The
+ *  space after Rp is non-breaking so a price never splits across two lines. */
 function money(?float $amount): string {
     if ($amount === null) return '';
-    return get_setting('currency_symbol', '$') . number_format($amount, 0);
+    return get_setting('currency_symbol', 'Rp') . "\u{00A0}" . number_format($amount, 0, ',', '.');
 }
 
 /** A service price as a range, a "from" figure, or "on request". */

@@ -18,3 +18,27 @@ function create_booking_request(array $d): bool {
         'created_at'     => date('Y-m-d H:i:s'),
     ]);
 }
+
+/**
+ * Build a wa.me link with the booking details pre-filled (Indonesian).
+ * The number lives in settings → 'whatsapp' (digits only, e.g. 6281211988279).
+ */
+function whatsapp_booking_url(array $d, string $service_name = ''): string {
+    $number = preg_replace('/\D+/', '', get_setting('whatsapp'));
+    if ($number === '') {
+        return '';
+    }
+    $lines = [
+        'Halo ÉCLAT! Saya ingin membuat janji.',
+        '',
+        'Nama: '    . ($d['name'] !== '' ? $d['name'] : '-'),
+        'Layanan: ' . ($service_name !== '' ? $service_name : '-'),
+        'Tanggal: ' . (!empty($d['preferred_date']) ? $d['preferred_date'] : '-'),
+    ];
+    if (!empty($d['phone'])) {
+        $lines[] = 'No. HP: ' . $d['phone'];
+    }
+    $lines[] = 'Catatan: ' . (!empty($d['message']) ? $d['message'] : '-');
+
+    return 'https://wa.me/' . $number . '?text=' . rawurlencode(implode("\n", $lines));
+}

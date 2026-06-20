@@ -1,7 +1,7 @@
 <?php /** Gallery page. Vars: $categories $items */ ?>
 
 <section class="page-hero">
-    <div class="page-hero-bg"><img src="https://picsum.photos/seed/eclat-gal-hero/1920/1000" alt="" aria-hidden="true"></div>
+    <div class="page-hero-bg"><img src="<?= e(url('assets/img/hero/gallery-hero.jpg')) ?>" alt="" aria-hidden="true"></div>
     <div class="container">
         <span class="eyebrow">Lookbook</span>
         <h1>Work from our chairs</h1>
@@ -22,7 +22,7 @@
         <div class="masonry">
             <?php foreach ($items as $g): ?>
                 <figure class="tile reveal" data-category="<?= e($g['category_slug']) ?>">
-                    <img src="<?= e($g['image_url']) ?>" alt="<?= e($g['title']) ?>" loading="lazy">
+                    <img src="<?= e(image($g['image_url'])) ?>" alt="<?= e($g['title']) ?>" loading="lazy">
                     <figcaption class="meta">
                         <span class="cat"><?= e($g['category_name']) ?></span>
                         <span class="ttl"><?= e($g['title']) ?></span>

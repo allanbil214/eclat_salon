@@ -17,7 +17,7 @@
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 
-.brand { font-family: var(--font-display); font-size: 1.55rem; font-weight: 600; letter-spacing: 0.02em; }
+.brand { font-family: var(--font-display); font-size: 1.55rem; font-weight: 400; letter-spacing: 0.02em; color: var(--text); transition: color var(--dur-fast) var(--ease); }
 .brand .dot { color: var(--accent); }
 
 .nav { display: flex; align-items: center; gap: 36px; }
@@ -42,6 +42,16 @@
 }
 .nav-links a:hover, .nav-links a.is-active { color: var(--text); }
 .nav-links a.is-active::after, .nav-links a:hover::after { width: 100%; }
+
+/* --- Header option A: white over the hero at the top, themed once scrolled --- */
+@media (min-width: 901px) {
+  .site-header:not(.scrolled) .nav-links a { color: rgba(255, 255, 255, 0.8); }
+  .site-header:not(.scrolled) .nav-links a:hover,
+  .site-header:not(.scrolled) .nav-links a.is-active { color: #fff; }
+}
+.site-header:not(.scrolled) .brand { color: #fff; }
+.site-header:not(.scrolled) .theme-toggle { color: rgba(255, 255, 255, 0.85); border-color: rgba(255, 255, 255, 0.4); }
+.site-header:not(.scrolled) .nav-toggle span { background: #fff; }
 
 .header-actions { display: flex; align-items: center; gap: 18px; }
 
@@ -69,14 +79,28 @@
   .nav {
     position: fixed;
     inset: 0;
+    height: 100vh;
+    height: 100dvh;          /* covers the full screen even as the mobile bars show/hide */
     flex-direction: column;
     justify-content: center;
     gap: 28px;
     background: var(--bg);
+    overscroll-behavior: contain;
     transform: translateX(100%);
     transition: transform var(--dur) var(--ease);
   }
   body.menu-open .nav { transform: none; }
+  /* Lock the page behind the menu so a fast scroll can't reveal it. */
+  body.menu-open { overflow: hidden; }
+  body.menu-open .book-fab { display: none; }
+  /* The scrolled header's backdrop-filter would otherwise trap the fixed
+     nav panel inside the header box — neutralise it while the menu is open. */
+  body.menu-open .site-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: transparent;
+    border-bottom-color: transparent;
+  }
   body.menu-open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   body.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
   body.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
@@ -105,7 +129,7 @@
 .preloader.loaded { opacity: 0; visibility: hidden; }
 .preloader .mark {
   font-family: var(--font-display);
-  font-size: 2.4rem; font-weight: 600;
+  font-size: 2.4rem; font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--text);
   opacity: 0;

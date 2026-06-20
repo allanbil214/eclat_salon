@@ -1,7 +1,7 @@
 <?php
-/** Book — shows the form and handles its submission. */
+/** Book — shows the form, saves the enquiry, then redirects to /booked. */
 $errors  = [];
-$success = false;
+$services = get_services();
 $old = ['name' => '', 'email' => '', 'phone' => '', 'service_id' => '', 'preferred_date' => '', 'message' => ''];
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
@@ -17,12 +17,32 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             $errors['email'] = 'A valid email lets us confirm your appointment.';
         }
         if (!$errors) {
-            create_booking_request($old);
-            $success = true;
-            $old = array_fill_keys(array_keys($old), '');
+            create_booking_request($old);          // keep the lead for the dashboard
+
+            // Look up the chosen service name for the WhatsApp message.
+            $service_name = '';
+            foreach ($services as $svc) {
+                if ((string) $svc['id'] === (string) $old['service_id']) {
+                    $service_name = $svc['category_name'] . ' — ' . $svc['name'];
+                    break;
+                }
+            }
+
+            // Hand off to the confirmation page (Post/Redirect/Get: no resubmit
+            // on refresh). The WhatsApp link travels in the session, not the URL.
+            if (session_status() !== PHP_SESSION_ACTIVE) {
+                session_start();
+            }
+            $_SESSION['booking'] = [
+                'wa_url' => whatsapp_booking_url($old, $service_name),
+                'name'   => $old['name'],
+            ];
+            header('Location: ' . url('booked'));
+            exit;
         }
     } else {
-        $success = true; // silently absorb bots
+        header('Location: ' . url(''));   // silently send bots away
+        exit;
     }
 }
 
@@ -32,9 +52,8 @@ render('book', [
     'active'   => '',
     'css'      => ['book'],
     'js'       => ['pages/book'],
-    'services' => get_services(),
+    'services' => $services,
     'hours'    => get_opening_hours(),
     'errors'   => $errors,
-    'success'  => $success,
     'old'      => $old,
 ]);

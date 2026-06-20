@@ -4,7 +4,7 @@ $cta_text  = $cta_text  ?? 'Tell us what you have been picturing. We will take i
 <section class="section">
     <div class="container">
         <div class="cta-banner reveal">
-            <div class="bg"><img src="https://picsum.photos/seed/eclat-cta/1600/800" alt="" aria-hidden="true" loading="lazy"></div>
+            <div class="bg"><img src="<?= e(url('assets/img/cta/cta.jpg')) ?>" alt="" aria-hidden="true" loading="lazy"></div>
             <div class="inner">
                 <span class="eyebrow eyebrow--center">Book an appointment</span>
                 <h2><?= e($cta_title) ?></h2>
