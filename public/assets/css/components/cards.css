@@ -79,3 +79,9 @@
   .menu-row .price { font-size: 0.98rem; }
   .menu-row .desc { font-size: 0.9rem; }
 }
+
+/* Filter bar — shared by the gallery and the shop. */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: clamp(32px, 4vw, 56px); }
+.filter-bar button { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); border: 1px solid var(--line-2); padding: 10px 20px; border-radius: 40px; transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+.filter-bar button:hover { color: var(--text); border-color: var(--accent); }
+.filter-bar button.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }

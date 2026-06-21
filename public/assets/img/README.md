@@ -71,3 +71,24 @@ well (faces optional).
 | `about/story-1.jpg` | About story (tall) | 900×1200 | "stylist at work" |
 | `about/story-2.jpg` | About story (wide) | 1200×750 | "salon detail wide" |
 | `cta/cta.jpg` | Booking banner background | 1600×800 | "hair salon dark moody" |
+
+## Shop — `shop/` · 600×600 (square) + `hero/shop-hero.jpg` (1920×1000)
+Product packshots — ideally the real product on a plain/dark background. Most
+brands provide press images, or shoot them on the salon shelf.
+
+| File | Product |
+|------|---------|
+| `hero/shop-hero.jpg` | Shop page background — "haircare products shelf" |
+| `shop/p1.jpg` | Olaplex No.3 Hair Perfector |
+| `shop/p2.jpg` | Olaplex No.4 Shampoo |
+| `shop/p3.jpg` | Kérastase Bain Satin Shampoo |
+| `shop/p4.jpg` | Kérastase Nutritive Hair Mask |
+| `shop/p5.jpg` | Davines OI Oil |
+| `shop/p6.jpg` | Oribe Gold Lust Repair Shampoo |
+| `shop/p7.jpg` | Wella Oil Reflections |
+| `shop/p8.jpg` | Redken Acidic Bonding Concentrate |
+| `shop/p9.jpg` | K18 Leave-In Molecular Repair Mask |
+
+Each product also has a small gallery on its detail page: `shop/pN-2.jpg` and
+`shop/pN-3.jpg` (600×600) are the extra thumbnails — swap them for more shots of
+the same product, or add rows to the `product_images` table for more.

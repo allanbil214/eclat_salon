@@ -18,3 +18,6 @@ ul, ol { list-style: none; padding: 0; }
     transition-duration: 0.001ms !important;
   }
 }
+
+/* The [hidden] attribute must always win, even over flex/grid display. */
+[hidden] { display: none !important; }

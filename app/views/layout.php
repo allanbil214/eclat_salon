@@ -8,16 +8,17 @@ $meta   = $meta   ?? get_setting('tagline');
 $css    = $css    ?? [];   // extra page stylesheets (names under /css)
 $js     = $js     ?? [];   // extra page scripts (names under /js)
 $active = $active ?? '';   // nav highlight key
+$solid_header = $solid_header ?? false;   // themed header for pages without a dark hero
 
 // Stylesheets are loaded in order: base → components → page.
 $base_css = ['base/tokens', 'base/reset', 'base/typography'];
 $component_css = [
     'components/layout', 'components/buttons', 'components/header',
     'components/hero', 'components/cards', 'components/interactions',
-    'components/forms', 'components/footer',
+    'components/forms', 'components/cart', 'components/footer',
 ];
 // Core scripts run on every page.
-$core_js = ['core/preloader', 'core/theme-toggle', 'core/nav', 'core/reveal', 'core/counters', 'core/accordion'];
+$core_js = ['core/preloader', 'core/theme-toggle', 'core/nav', 'core/reveal', 'core/counters', 'core/accordion', 'core/cart'];
 ?>
 <!DOCTYPE html>
 <html lang="en" data-theme="<?= e(current_theme()) ?>">
@@ -39,12 +40,13 @@ $core_js = ['core/preloader', 'core/theme-toggle', 'core/nav', 'core/reveal', 'c
         <div class="mark"><?= e(get_setting('site_name')) ?><span class="dot">.</span></div>
     </div>
 
-    <?php partial('header', ['active' => $active]); ?>
+    <?php partial('header', ['active' => $active, 'solid' => $solid_header]); ?>
 
     <main id="main">
         <?php require $view_file; ?>
     </main>
 
+    <?php partial('cart_drawer'); ?>
     <?php partial('footer'); ?>
 
     <?php foreach (array_merge($core_js, $js) as $script) echo js($script) . "\n    "; ?>

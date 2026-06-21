@@ -163,9 +163,36 @@ INSERT INTO faq (question, answer, sort_order) VALUES
 INSERT INTO posts (title, slug, excerpt, body, cover_url, author, published_at, is_published) VALUES
 ('How to make your balayage last longer', 'make-balayage-last', 'Five habits that keep hand-painted colour looking fresh for months.', 'Full article body goes here.', 'https://picsum.photos/seed/eclat-post1/1200/700', 'Mara Voss', '2026-05-02 10:00:00', 1);
 
-INSERT INTO products (name, brand, description, price, image_url, sort_order) VALUES
-('No.3 Hair Perfector', 'Olaplex', 'At-home bond-building treatment to use between appointments.', 450000, 'https://picsum.photos/seed/eclat-prod1/600/600', 1),
-('Bain Satin Shampoo',  'Kérastase', 'Nourishing shampoo for normal to dry hair.', 520000, 'https://picsum.photos/seed/eclat-prod2/600/600', 2);
+INSERT INTO products (name, slug, brand, description, price, image_url, in_stock, sort_order) VALUES
+('No.3 Hair Perfector',              'olaplex-no-3-hair-perfector',          'Olaplex',             'At-home bond-building treatment to use weekly between appointments.',          450000,  'assets/img/shop/p1.jpg', 1, 1),
+('No.4 Bond Maintenance Shampoo',    'olaplex-no-4-bond-maintenance-shampoo','Olaplex',             'Reparative, hydrating shampoo that keeps coloured hair strong.',               520000,  'assets/img/shop/p2.jpg', 1, 2),
+('Bain Satin Shampoo',               'kerastase-bain-satin-shampoo',         'Kérastase',           'Nourishing everyday shampoo for normal to dry hair.',                          520000,  'assets/img/shop/p3.jpg', 1, 3),
+('Nutritive Hair Mask',              'kerastase-nutritive-hair-mask',        'Kérastase',           'Deep-conditioning mask that restores softness and shine.',                     680000,  'assets/img/shop/p4.jpg', 1, 4),
+('OI Oil',                           'davines-oi-oil',                       'Davines',             'Lightweight, multi-benefit oil for shine, softness and heat protection.',      590000,  'assets/img/shop/p5.jpg', 1, 5),
+('Gold Lust Repair Shampoo',         'oribe-gold-lust-repair-shampoo',       'Oribe',               'A luxury repairing shampoo that rebalances and revitalises the scalp.',        850000,  'assets/img/shop/p6.jpg', 1, 6),
+('Oil Reflections Luminous Oil',     'wella-oil-reflections-luminous-oil',   'Wella Professionals', 'Anti-oxidant oil for instant smoothness and mirror shine.',                    420000,  'assets/img/shop/p7.jpg', 1, 7),
+('Acidic Bonding Concentrate',       'redken-acidic-bonding-concentrate',    'Redken',              'Leave-in treatment for severely damaged, over-processed hair.',                480000,  'assets/img/shop/p8.jpg', 1, 8),
+('Leave-In Molecular Repair Mask',   'k18-leave-in-molecular-repair-mask',   'K18',                 'Patented four-minute mask that reverses damage from colour and heat.',         1150000, 'assets/img/shop/p9.jpg', 0, 9);
+
+-- Extra gallery images (2 per product) for the product-detail thumbnails.
+INSERT INTO product_images (product_id, image_url, sort_order) VALUES
+(1,'assets/img/shop/p1-2.jpg',1),(1,'assets/img/shop/p1-3.jpg',2),
+(2,'assets/img/shop/p2-2.jpg',1),(2,'assets/img/shop/p2-3.jpg',2),
+(3,'assets/img/shop/p3-2.jpg',1),(3,'assets/img/shop/p3-3.jpg',2),
+(4,'assets/img/shop/p4-2.jpg',1),(4,'assets/img/shop/p4-3.jpg',2),
+(5,'assets/img/shop/p5-2.jpg',1),(5,'assets/img/shop/p5-3.jpg',2),
+(6,'assets/img/shop/p6-2.jpg',1),(6,'assets/img/shop/p6-3.jpg',2),
+(7,'assets/img/shop/p7-2.jpg',1),(7,'assets/img/shop/p7-3.jpg',2),
+(8,'assets/img/shop/p8-2.jpg',1),(8,'assets/img/shop/p8-3.jpg',2),
+(9,'assets/img/shop/p9-2.jpg',1),(9,'assets/img/shop/p9-3.jpg',2);
+
+-- A sample order so the dashboard isn't empty (safe to delete).
+INSERT INTO orders (ref, customer_name, customer_phone, customer_email, address, fulfillment, note, item_count, total, status, created_at) VALUES
+('ECL-0001','Putri Andini','081234567890','putri@example.com','Jl. Senopati No. 12, Jakarta Selatan','delivery','Tolong dibungkus rapi ya','3',1490000,'new','2026-06-18 14:32:00');
+
+INSERT INTO order_items (order_id, product_id, product_name, brand, unit_price, qty, line_total) VALUES
+(1,1,'No.3 Hair Perfector','Olaplex',450000,2,900000),
+(1,5,'OI Oil','Davines',590000,1,590000);
 
 INSERT INTO promotions (title, detail, cta_label, cta_url, is_active, sort_order) VALUES
 ('20% off your first colour', 'New guests save 20% on any colour service with a master colourist this season.', 'Book now', '/book', 1, 1);

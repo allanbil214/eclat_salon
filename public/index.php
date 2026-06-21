@@ -22,6 +22,12 @@ $path = '/' . trim($uri, '/');
 
 $controller = $routes[$path] ?? null;
 
+// Dynamic: /shop/{slug} → product detail page.
+if ($controller === null && preg_match('#^/shop/([a-z0-9][a-z0-9-]*)$#', $path, $m)) {
+    $_GET['slug'] = $m[1];
+    $controller = 'product';
+}
+
 if ($controller === null) {
     http_response_code(404);
     $controller_file = APP_PATH . '/controllers/not_found.php';

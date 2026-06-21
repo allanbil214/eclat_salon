@@ -137,3 +137,20 @@
 }
 .preloader .mark .dot { color: var(--accent); }
 @keyframes markIn { 0% { opacity: 0; letter-spacing: 0.4em; } 60% { opacity: 1; } 100% { opacity: 1; letter-spacing: 0.05em; } }
+
+/* --- Cart icon colour over the hero (matches the theme toggle) --- */
+.site-header:not(.scrolled) .cart-toggle { color: rgba(255, 255, 255, 0.85); }
+.site-header:not(.scrolled) .cart-toggle:hover { color: #fff; }
+
+/* --- Header option B: solid/themed from the top (pages without a dark hero) --- */
+@media (min-width: 901px) {
+  .site-header.is-solid:not(.scrolled) .nav-links a { color: var(--text-2); }
+  .site-header.is-solid:not(.scrolled) .nav-links a:hover,
+  .site-header.is-solid:not(.scrolled) .nav-links a.is-active { color: var(--text); }
+}
+.site-header.is-solid:not(.scrolled) .brand { color: var(--text); }
+.site-header.is-solid:not(.scrolled) .theme-toggle { color: var(--text-2); border-color: var(--line-2); }
+.site-header.is-solid:not(.scrolled) .cart-toggle { color: var(--text-2); }
+.site-header.is-solid:not(.scrolled) .cart-toggle:hover,
+.site-header.is-solid:not(.scrolled) .theme-toggle:hover { color: var(--accent); }
+.site-header.is-solid:not(.scrolled) .nav-toggle span { background: var(--text); }

@@ -153,6 +153,9 @@ CREATE TABLE booking_requests (
 
 DROP TABLE IF EXISTS faq;
 DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS product_images;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS promotions;
 DROP TABLE IF EXISTS newsletter_subscribers;
@@ -184,12 +187,53 @@ CREATE TABLE posts (
 CREATE TABLE products (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(160) NOT NULL,
+    slug        VARCHAR(200) NOT NULL UNIQUE,
     brand       VARCHAR(80)  NOT NULL DEFAULT '',
     description VARCHAR(500) NOT NULL DEFAULT '',
     price       DECIMAL(10,2) NULL,
     image_url   VARCHAR(400) NOT NULL DEFAULT '',
     in_stock    TINYINT(1)   NOT NULL DEFAULT 1,
     sort_order  INT          NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Extra gallery images for a product (the product-detail thumbnails).
+CREATE TABLE product_images (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT          NOT NULL,
+    image_url  VARCHAR(400) NOT NULL,
+    sort_order INT          NOT NULL DEFAULT 0,
+    CONSTRAINT fk_product_images_product
+        FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Shop orders placed via the cart (checkout hands off to WhatsApp).
+CREATE TABLE orders (
+    id             INT AUTO_INCREMENT PRIMARY KEY,
+    ref            VARCHAR(20)  NOT NULL DEFAULT '',
+    customer_name  VARCHAR(160) NOT NULL DEFAULT '',
+    customer_phone VARCHAR(60)  NOT NULL DEFAULT '',
+    customer_email VARCHAR(160) NOT NULL DEFAULT '',
+    address        VARCHAR(500) NOT NULL DEFAULT '',
+    fulfillment    VARCHAR(20)  NOT NULL DEFAULT 'pickup',   -- pickup | delivery
+    note           VARCHAR(500) NOT NULL DEFAULT '',
+    item_count     INT          NOT NULL DEFAULT 0,
+    total          DECIMAL(12,2) NOT NULL DEFAULT 0,
+    status         VARCHAR(20)  NOT NULL DEFAULT 'new',      -- new | contacted | completed
+    created_at     DATETIME     NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Line items for an order (price/name snapshotted so history stays accurate).
+CREATE TABLE order_items (
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    order_id     INT          NOT NULL,
+    product_id   INT          NULL,
+    product_name VARCHAR(200) NOT NULL,
+    brand        VARCHAR(80)  NOT NULL DEFAULT '',
+    unit_price   DECIMAL(10,2) NOT NULL DEFAULT 0,
+    qty          INT          NOT NULL DEFAULT 1,
+    line_total   DECIMAL(12,2) NOT NULL DEFAULT 0,
+    CONSTRAINT fk_order_items_order
+        FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- TODO: promo banners / seasonal offers.
