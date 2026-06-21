@@ -85,3 +85,55 @@
 .filter-bar button { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); border: 1px solid var(--line-2); padding: 10px 20px; border-radius: 40px; transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
 .filter-bar button:hover { color: var(--text); border-color: var(--accent); }
 .filter-bar button.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+
+/* Article cards + grid — shared by the blog index and the home/product strips. */
+.post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(22px, 2.6vw, 40px); }
+.post-grid--3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .post-grid, .post-grid--3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .post-grid, .post-grid--3 { grid-template-columns: 1fr; } }
+
+.post-card { display: flex; flex-direction: column; }
+.post-card.hide { display: none; }
+.post-cover { display: block; aspect-ratio: 3 / 2; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-3); }
+.post-cover img { width: 100%; height: 100%; object-fit: cover; filter: var(--img-filter); transition: transform 0.7s var(--ease); }
+.post-card:hover .post-cover img { transform: scale(1.04); }
+
+.post-body { padding-top: 18px; }
+.post-meta, .post-foot { display: flex; align-items: center; gap: 9px; font-size: 0.72rem; letter-spacing: 0.04em; color: var(--text-3); }
+.post-meta .dot, .post-foot .dot { color: var(--line-2); }
+.post-cat { color: var(--accent); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 600; }
+.post-title { font-size: clamp(1.2rem, 1rem + 0.7vw, 1.5rem); margin: 12px 0 0; line-height: 1.25; }
+.post-title a { color: var(--text); transition: color var(--dur-fast) var(--ease); }
+.post-title a:hover { color: var(--accent); }
+.post-excerpt { color: var(--text-2); font-size: 0.94rem; margin-top: 10px; }
+.post-foot { margin-top: 16px; }
+
+/* Product cards + grid — shared by the shop, product detail, and home strip. */
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.5vw, 36px); }
+.product-grid--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1040px) { .product-grid--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px)  { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px)  { .product-grid, .product-grid--4 { grid-template-columns: 1fr; } }
+
+.product-card { display: flex; flex-direction: column; background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.product-card:hover { border-color: var(--line-2); transform: translateY(-3px); }
+.product-card.hide { display: none; }
+
+.product-media { position: relative; aspect-ratio: 1 / 1; background: var(--bg-3); overflow: hidden; }
+a.product-media { display: block; }
+.product-media img { width: 100%; height: 100%; object-fit: cover; filter: var(--img-filter); transition: transform 0.7s var(--ease); }
+.product-card:hover .product-media img { transform: scale(1.05); }
+.stock-badge { position: absolute; top: 12px; left: 12px; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; background: rgba(8,7,10,0.7); padding: 5px 10px; border-radius: 2px; backdrop-filter: blur(4px); }
+.product-card.is-out .product-media img { filter: grayscale(1) brightness(0.7); }
+
+.product-body { padding: clamp(18px, 2vw, 26px); display: flex; flex-direction: column; flex: 1; }
+.product-brand { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+.product-name { font-size: 1.2rem; margin: 8px 0 0; }
+.product-name a { color: inherit; transition: color var(--dur-fast) var(--ease); }
+.product-name a:hover { color: var(--accent); }
+.product-desc { color: var(--text-2); font-size: 0.92rem; margin-top: 10px; }
+.product-foot { margin-top: 18px; padding-top: 18px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); }
+.product-price { font-family: var(--font-display); font-size: 1.25rem; color: var(--text); }
+.product-wa { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; gap: 0.5em; transition: gap var(--dur-fast) var(--ease); }
+.product-wa:hover { gap: 0.9em; }
+.product-wa.muted { color: var(--text-3); }

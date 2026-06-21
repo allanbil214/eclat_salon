@@ -1,0 +1,29 @@
+/* Single article: cover hero + long-form body (renders Quill HTML). */
+.article-hero { position: relative; padding-top: 200px; padding-bottom: clamp(40px, 6vw, 80px); color: #fff; isolation: isolate; }
+.article-hero-bg { position: absolute; inset: 0; z-index: -1; background: var(--bg-3); }
+.article-hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,7,10,0.55) 0%, rgba(8,7,10,0.82) 100%); }
+.article-hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+.article-hero .breadcrumb { color: rgba(255,255,255,0.7); margin-bottom: 22px; }
+.article-hero .breadcrumb a:hover { color: #fff; }
+.article-hero .breadcrumb .sep { color: var(--accent); }
+.article-meta { display: flex; align-items: center; gap: 10px; font-size: 0.74rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.75); }
+.article-meta .post-cat { color: var(--accent-2); }
+.article-meta .dot { color: rgba(255,255,255,0.4); }
+.article-title { font-size: clamp(2.1rem, 1.2rem + 3.6vw, 3.8rem); margin: 18px 0 0; max-width: 18ch; }
+.article-byline { margin-top: 18px; font-size: 0.86rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.8); }
+
+.article-section { padding-top: clamp(40px, 5vw, 72px); }
+/* Long-form typography — styles whatever HTML the editor produces. */
+.article-body { font-size: 1.08rem; line-height: 1.8; color: var(--text-2); }
+.article-body > * + * { margin-top: 1.3em; }
+.article-body h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem); color: var(--text); margin-top: 1.8em; line-height: 1.2; }
+.article-body h3 { font-family: var(--font-display); font-size: 1.4rem; color: var(--text); margin-top: 1.6em; }
+.article-body p { color: var(--text-2); }
+.article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.article-body strong { color: var(--text); font-weight: 700; }
+.article-body ul, .article-body ol { padding-left: 1.3em; }
+.article-body li { margin-top: 0.5em; }
+.article-body li::marker { color: var(--accent); }
+.article-body blockquote { border-left: 2px solid var(--accent); padding-left: 24px; font-family: var(--font-display); font-size: 1.4rem; line-height: 1.4; color: var(--text); font-style: italic; }
+.article-body img { width: 100%; border-radius: var(--radius-lg); margin-block: 1.6em; }
+.article-back { margin-top: clamp(36px, 4vw, 56px); }

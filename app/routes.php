@@ -10,9 +10,11 @@ return [
     '/about'    => 'about',
     '/services' => 'services',
     '/gallery'  => 'gallery',
+    '/blog'     => 'blog',
     '/shop'     => 'shop',
     '/cart'     => 'cart',
     '/ordered'  => 'ordered',
+    '/faq'      => 'faq',
     '/book'     => 'book',
     '/booked'   => 'booked',
 ];

@@ -12,4 +12,6 @@ render('home', [
     'team'           => get_team(4),
     'gallery'        => get_gallery(null, 6),
     'testimonials'   => get_testimonials(6),
+    'shop_products'  => get_featured_products(4),
+    'articles'       => get_recent_posts(3),
 ]);

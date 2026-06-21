@@ -24,7 +24,9 @@ $tt = get_setting('tiktok');    $yt = get_setting('youtube');
                     <li><a href="<?= e(url('about')) ?>">About</a></li>
                     <li><a href="<?= e(url('services')) ?>">Services &amp; Pricing</a></li>
                     <li><a href="<?= e(url('gallery')) ?>">Lookbook</a></li>
+                    <li><a href="<?= e(url('blog')) ?>">Article</a></li>
                     <li><a href="<?= e(url('shop')) ?>">Shop</a></li>
+                    <li><a href="<?= e(url('faq')) ?>">FAQ</a></li>
                     <li><a href="<?= e(url('book')) ?>">Book an Appointment</a></li>
                 </ul>
             </div>

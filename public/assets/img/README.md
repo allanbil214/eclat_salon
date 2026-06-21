@@ -71,6 +71,7 @@ well (faces optional).
 | `about/story-1.jpg` | About story (tall) | 900×1200 | "stylist at work" |
 | `about/story-2.jpg` | About story (wide) | 1200×750 | "salon detail wide" |
 | `cta/cta.jpg` | Booking banner background | 1600×800 | "hair salon dark moody" |
+| `hero/faq-hero.jpg` | FAQ page background | 1920×1000 | "salon reception calm" |
 
 ## Shop — `shop/` · 600×600 (square) + `hero/shop-hero.jpg` (1920×1000)
 Product packshots — ideally the real product on a plain/dark background. Most
@@ -92,3 +93,15 @@ brands provide press images, or shoot them on the salon shelf.
 Each product also has a small gallery on its detail page: `shop/pN-2.jpg` and
 `shop/pN-3.jpg` (600×600) are the extra thumbnails — swap them for more shots of
 the same product, or add rows to the `product_images` table for more.
+
+## Article (blog) — `blog/` · 1200×700 covers + `hero/blog-hero.jpg` (1920×1000)
+| File | Post |
+|------|------|
+| `hero/blog-hero.jpg` | Article index background — "salon editorial" |
+| `blog/c1.jpg` | How to make your balayage last longer |
+| `blog/c2.jpg` | The five-minute routine for healthier hair |
+| `blog/c3.jpg` | Choosing a fringe for your face shape |
+| `blog/c4.jpg` | This season we are loving warm brunettes |
+| `blog/c5.jpg` | Planning your bridal hair |
+
+Post bodies are HTML in the `posts.body` column — ready for a Quill editor later.

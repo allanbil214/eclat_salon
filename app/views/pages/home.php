@@ -143,6 +143,9 @@
     </div>
 </section>
 
+<!-- Shop the shelf -->
+<?php partial('products-strip', ['products' => $shop_products, 'eyebrow' => 'The shelf', 'heading' => 'Take the salon home']); ?>
+
 <!-- Reviews -->
 <section class="section section--alt">
     <div class="container">
@@ -153,5 +156,7 @@
         <?php partial('testimonials', ['items' => $testimonials]); ?>
     </div>
 </section>
+
+<?php partial('posts-strip', ['posts' => $articles, 'eyebrow' => 'Article', 'heading' => 'From the studio']); ?>
 
 <?php partial('cta'); ?>

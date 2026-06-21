@@ -157,11 +157,39 @@ INSERT INTO booking_requests (name, email, phone, service_id, preferred_date, me
 -- =========================================================================
 INSERT INTO faq (question, answer, sort_order) VALUES
 ('Do I need a consultation before a colour appointment?', 'For first-time colour, big changes or corrections, yes — we book a short consultation (often same visit) so your stylist can plan properly. For maintenance, it is built into your appointment.', 1),
-('What is your cancellation policy?', 'We ask for 48 hours'' notice so we can offer the slot to someone on the waitlist. Late cancellations may incur a fee.', 2),
-('How long does balayage last?', 'Because it is hand-painted and grows out softly, most guests return every 10–14 weeks, with a gloss refresh in between.', 3);
+('What is your cancellation policy?', 'We ask for 48 hours'' notice so we can offer the slot to someone on the waitlist. Late cancellations or no-shows may incur a fee of up to 50% of the booked service.', 2),
+('Do you take a deposit?', 'For longer colour services and first-time bookings we take a small deposit when you book, which comes straight off your final bill. Everyday cuts and styling do not require one.', 3),
+('How long does balayage last?', 'Because it is hand-painted and grows out softly, most guests return every 10–14 weeks, with a gloss refresh in between to keep the tone fresh.', 4),
+('How do I keep my colour looking fresh at home?', 'Wash a little less often and in cooler water, use a sulphate-free colour-safe shampoo, and add a weekly bonding mask. We are happy to build you a simple routine in the chair.', 5),
+('Can I buy the products you use in the salon?', 'Yes — most of what we reach for in the chair is on our shelf, and you can browse it on our Shop page or ask your stylist on the day. Tap Enquire on any product to ask about availability on WhatsApp.', 6),
+('What payment methods do you accept?', 'We accept cash, all major debit and credit cards, and QRIS / bank transfer. Payment is taken at the end of your appointment.', 7),
+('Where are you, and is there parking?', 'We are in Kebayoran Baru, South Jakarta. There is paid parking in the building and street parking nearby; ride-hailing drops you right at the door.', 8);
 
-INSERT INTO posts (title, slug, excerpt, body, cover_url, author, published_at, is_published) VALUES
-('How to make your balayage last longer', 'make-balayage-last', 'Five habits that keep hand-painted colour looking fresh for months.', 'Full article body goes here.', 'https://picsum.photos/seed/eclat-post1/1200/700', 'Mara Voss', '2026-05-02 10:00:00', 1);
+INSERT INTO posts (title, slug, excerpt, body, cover_url, author, category, published_at, is_published) VALUES
+('How to make your balayage last longer', 'make-balayage-last',
+ 'Five habits that keep hand-painted colour looking fresh for months.',
+ '<p>Balayage is hand-painted to grow out softly, but the colour still needs care to stay luminous between visits. With a few simple habits you can keep that sun-kissed finish looking fresh for months.</p><h2>Wash less, and wash cooler</h2><p>Every wash gently lifts colour. Stretching the time between washes, and rinsing in cool rather than hot water, keeps the tone richer for longer. Two to three washes a week is plenty for most hair types.</p><h2>Feed the ends</h2><p>Painted colour sits on the mid-lengths and ends, the most fragile part of the hair. A weekly mask keeps them soft and reflective.</p><ul><li>Use a sulphate-free, colour-safe shampoo.</li><li>Apply a bonding treatment once a week.</li><li>Always use heat protection before styling.</li><li>Book a gloss refresh every eight to ten weeks.</li></ul><p>Caring for balayage is mostly about gentleness. Treat the colour kindly and it will reward you with months of effortless shine.</p>',
+ 'assets/img/blog/c1.jpg', 'Mara Voss', 'Colour', '2026-05-28 10:00:00', 1),
+
+('The five-minute routine for healthier hair', 'five-minute-hair-routine',
+ 'Small daily habits beat expensive products. Here is where to start.',
+ '<p>Healthy hair rarely comes from a single miracle product. It comes from a handful of small habits repeated daily. The good news is that the whole routine takes about five minutes.</p><h2>Start in the shower</h2><p>Focus shampoo on the scalp, not the lengths, and let it rinse through the ends. Follow with conditioner from the mid-lengths down, and comb it through with your fingers before rinsing.</p><h2>Be kind when it is wet</h2><p>Wet hair stretches and snaps easily. Blot with a soft towel rather than rubbing, and detangle gently from the ends upward.</p><ul><li>Always detangle from the bottom up.</li><li>Let hair air-dry to eighty percent before heat styling.</li><li>Sleep on a silk pillowcase to cut friction.</li></ul><p>Consistency is everything. Done daily, these small choices add up to visibly stronger, glossier hair within weeks.</p>',
+ 'assets/img/blog/c2.jpg', 'Sasha Lin', 'Care', '2026-05-14 10:00:00', 1),
+
+('Choosing a fringe for your face shape', 'fringe-for-face-shape',
+ 'Curtain, blunt, or wispy — what actually suits you.',
+ '<p>A fringe can reframe your whole face, but the right shape depends on your features. Here is a quick guide to what tends to flatter each face shape.</p><h2>Round faces</h2><p>Longer, side-swept or curtain fringes add length and structure, drawing the eye downward rather than across.</p><h2>Square and angular faces</h2><p>Soft, wispy fringes soften a strong jaw, while a heavier blunt fringe can emphasise it if that is the look you want.</p><h2>Long faces</h2><p>A fuller, blunt fringe shortens the face and balances the proportions beautifully.</p><p>The most important thing is honest advice in the chair. Bring a photo of what you love and we will adapt it to suit you.</p>',
+ 'assets/img/blog/c3.jpg', 'Theo Park', 'Styling', '2026-04-30 10:00:00', 1),
+
+('This season we are loving warm brunettes', 'warm-brunettes-trend',
+ 'Soft, glossy, low-maintenance brown is the colour of the season.',
+ '<p>After seasons of cool tones, warmth is back. Glossy chestnut, soft chocolate and golden brunette are everywhere, and for good reason: they flatter almost every skin tone and grow out gracefully.</p><h2>Why it works</h2><p>Warm brunette catches the light without the upkeep of high-contrast blonde. A few face-framing highlights add dimension while keeping the maintenance low.</p><p>If you have been colouring cool for years, the shift can be gradual. We can warm the tone over a couple of appointments so it never feels drastic.</p><p>Pair it with a weekly gloss at home and the colour stays rich and reflective right up to your next visit.</p>',
+ 'assets/img/blog/c4.jpg', 'Sasha Lin', 'Trends', '2026-04-12 10:00:00', 1),
+
+('Planning your bridal hair', 'planning-bridal-hair',
+ 'A simple timeline so your wedding-day hair is effortless.',
+ '<p>Wedding hair should feel like you on your best day, not a stranger in the mirror. A little planning makes the morning calm rather than rushed.</p><h2>Three months out</h2><p>Book your trial and any colour you want refreshed. This is the time to experiment, not the week of the wedding.</p><h2>The final weeks</h2><p>Keep colour and cuts subtle and familiar. A bonding treatment in the last fortnight leaves the hair glossy for photographs.</p><ul><li>Bring photos, your veil and any accessories to the trial.</li><li>Tell us about the dress neckline — it shapes the style.</li><li>Plan a gentle wash the day before, not the morning of.</li></ul><p>On the day, we come to you or you come to us, and all you have to do is relax.</p>',
+ 'assets/img/blog/c5.jpg', 'Nadia Reyes', 'Occasions', '2026-03-20 10:00:00', 1);
 
 INSERT INTO products (name, slug, brand, description, price, image_url, in_stock, sort_order) VALUES
 ('No.3 Hair Perfector',              'olaplex-no-3-hair-perfector',          'Olaplex',             'At-home bond-building treatment to use weekly between appointments.',          450000,  'assets/img/shop/p1.jpg', 1, 1),

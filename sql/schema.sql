@@ -179,6 +179,7 @@ CREATE TABLE posts (
     body        MEDIUMTEXT   NOT NULL,
     cover_url   VARCHAR(400) NOT NULL DEFAULT '',
     author      VARCHAR(120) NOT NULL DEFAULT '',
+    category    VARCHAR(80)  NOT NULL DEFAULT '',
     published_at DATETIME    NULL,
     is_published TINYINT(1)  NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

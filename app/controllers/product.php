@@ -20,4 +20,5 @@ render('product', [
     'gallery'  => get_product_gallery($product),
     'related'  => get_related_products($product, 3),
     'wa_url'   => whatsapp_product_url($product),
+    'articles' => get_recent_posts(3),
 ]);

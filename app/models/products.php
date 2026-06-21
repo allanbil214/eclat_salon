@@ -13,6 +13,13 @@ function get_products(?string $brand = null): array {
     return q($sql, $params);
 }
 
+/** A few in-stock products for the homepage shelf strip. */
+function get_featured_products(int $limit = 4): array {
+    return q(
+        'SELECT * FROM products WHERE in_stock = 1 ORDER BY sort_order ASC LIMIT ' . (int) $limit
+    );
+}
+
 /** Distinct brands present in the shop, for the filter bar. */
 function get_product_brands(): array {
     return array_column(

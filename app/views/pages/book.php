@@ -84,6 +84,10 @@ $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id'
                     </div>
                 <?php endforeach; ?>
             </div>
+            <div class="aside-block">
+                <div class="lbl">Before you book</div>
+                <a class="val" href="<?= e(url('faq')) ?>">Questions about appointments, colour or payment? See our FAQ →</a>
+            </div>
         </aside>
     </div>
 </section>

@@ -7,6 +7,7 @@ $links = [
     'about'    => ['About', url('about')],
     'services' => ['Services', url('services')],
     'gallery'  => ['Gallery', url('gallery')],
+    'blog'     => ['Article', url('blog')],
     'shop'     => ['Shop', url('shop')],
 ];
 ?>

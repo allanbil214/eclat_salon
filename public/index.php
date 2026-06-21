@@ -28,6 +28,12 @@ if ($controller === null && preg_match('#^/shop/([a-z0-9][a-z0-9-]*)$#', $path, 
     $controller = 'product';
 }
 
+// Dynamic: /blog/{slug} → article page.
+if ($controller === null && preg_match('#^/blog/([a-z0-9][a-z0-9-]*)$#', $path, $m)) {
+    $_GET['slug'] = $m[1];
+    $controller = 'article';
+}
+
 if ($controller === null) {
     http_response_code(404);
     $controller_file = APP_PATH . '/controllers/not_found.php';

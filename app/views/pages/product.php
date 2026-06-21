@@ -98,3 +98,5 @@
     </div>
 </section>
 <?php endif; ?>
+
+<?php partial('posts-strip', ['posts' => $articles, 'eyebrow' => 'Article', 'heading' => 'Hair tips & inspiration']); ?>
