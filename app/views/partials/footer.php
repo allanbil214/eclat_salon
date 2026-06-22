@@ -56,6 +56,9 @@ $tt = get_setting('tiktok');    $yt = get_setting('youtube');
 
         <div class="footer-bottom">
             <span>© <?= date('Y') ?> <?= e(get_setting('site_name_full')) ?>. All rights reserved.</span>
+            <span class="footer-legal">
+                <a href="<?= e(url('privacy')) ?>">Privacy</a> · <a href="<?= e(url('terms')) ?>">Terms</a>
+            </span>
             <span>Crafted in Jakarta · A demo template</span>
         </div>
     </div>

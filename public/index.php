@@ -20,6 +20,12 @@ if (BASE_URL !== '') {
 }
 $path = '/' . trim($uri, '/');
 
+// Admin area — everything under /admin has its own router (auth, layout, CSRF).
+if ($path === '/admin' || str_starts_with($path, '/admin/')) {
+    require APP_PATH . '/admin/router.php';
+    return;
+}
+
 $controller = $routes[$path] ?? null;
 
 // Dynamic: /shop/{slug} → product detail page.
@@ -32,6 +38,13 @@ if ($controller === null && preg_match('#^/shop/([a-z0-9][a-z0-9-]*)$#', $path, 
 if ($controller === null && preg_match('#^/blog/([a-z0-9][a-z0-9-]*)$#', $path, $m)) {
     $_GET['slug'] = $m[1];
     $controller = 'article';
+}
+
+// Catch-all: a single-segment path may be a static page (e.g. /privacy).
+// The page controller renders it, or 404s if there is no such page.
+if ($controller === null && preg_match('#^/([a-z0-9][a-z0-9-]*)$#', $path, $m)) {
+    $_GET['slug'] = $m[1];
+    $controller = 'page';
 }
 
 if ($controller === null) {

@@ -165,6 +165,18 @@ INSERT INTO faq (question, answer, sort_order) VALUES
 ('What payment methods do you accept?', 'We accept cash, all major debit and credit cards, and QRIS / bank transfer. Payment is taken at the end of your appointment.', 7),
 ('Where are you, and is there parking?', 'We are in Kebayoran Baru, South Jakarta. There is paid parking in the building and street parking nearby; ride-hailing drops you right at the door.', 8);
 
+INSERT INTO pages (slug, title, body, is_active, updated_at) VALUES
+('privacy', 'Privacy Policy',
+ '<p class="page-flag"><strong>Sample text.</strong> This is placeholder wording for demonstration only. Replace it with your own policy and have it reviewed before you launch.</p><p>ÉCLAT ("we", "us") respects your privacy. This policy explains what we collect when you use our website and book with us.</p><h2>What we collect</h2><p>When you book an appointment or place an order, we collect the details you give us — such as your name, phone number, email and address. We also collect basic, anonymous usage data to keep the site working.</p><h2>How we use it</h2><p>We use your details only to arrange your appointment or order and to contact you about it. We do not sell your information to anyone.</p><h2>Your choices</h2><p>You may ask us to update or delete your details at any time by contacting the studio.</p><p>Questions about this policy? Reach us using the details on our booking page.</p>',
+ 1, '2026-06-01 09:00:00'),
+('terms', 'Terms of Service',
+ '<p class="page-flag"><strong>Sample text.</strong> This is placeholder wording for demonstration only. Replace it with your own terms and have them reviewed before you launch.</p><p>These terms apply when you use the ÉCLAT website, book an appointment or buy a product from us.</p><h2>Appointments</h2><p>Bookings are requests until confirmed by the studio. We ask for reasonable notice if you need to cancel or reschedule, as set out in our FAQ.</p><h2>Products</h2><p>Prices are shown in Indonesian Rupiah and may change. Orders placed through the site are confirmed with you on WhatsApp before any payment is taken.</p><h2>Liability</h2><p>We take great care with every service, but to the extent permitted by law our liability is limited to the value of the service or product concerned.</p><p>Questions about these terms? Reach us using the details on our booking page.</p>',
+ 1, '2026-06-01 09:00:00');
+
+-- Dashboard login: admin / qweasdzxc
+INSERT INTO admin_users (username, password_hash, name, created_at) VALUES
+('admin', '$2y$10$xQ1DmtwN75CKa7.P6vilH.ivCVAtG10pGu0JXyiMiwG/TBKnqde5a', 'Studio Admin', '2026-06-01 09:00:00');
+
 INSERT INTO posts (title, slug, excerpt, body, cover_url, author, category, published_at, is_published) VALUES
 ('How to make your balayage last longer', 'make-balayage-last',
  'Five habits that keep hand-painted colour looking fresh for months.',

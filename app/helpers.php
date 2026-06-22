@@ -89,9 +89,9 @@ function fmt_time(?string $time): string {
  * Render a page template inside the main layout.
  * Controllers call this last; $data keys become variables in the view.
  */
-function render(string $page, array $data = []): void {
+function render(string $view, array $data = []): void {
+    $view_file = VIEWS_PATH . '/pages/' . $view . '.php';
     extract($data, EXTR_SKIP);
-    $view_file = VIEWS_PATH . '/pages/' . $page . '.php';
     require VIEWS_PATH . '/layout.php';
 }
 

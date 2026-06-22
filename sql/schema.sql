@@ -151,7 +151,9 @@ CREATE TABLE booking_requests (
 -- Build controllers + views for these when ready.
 -- =========================================================================
 
+DROP TABLE IF EXISTS admin_users;
 DROP TABLE IF EXISTS faq;
+DROP TABLE IF EXISTS pages;
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
@@ -168,6 +170,25 @@ CREATE TABLE faq (
     answer     VARCHAR(800) NOT NULL,
     sort_order INT          NOT NULL DEFAULT 0,
     is_active  TINYINT(1)   NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Static / legal pages (Privacy, Terms, …) — body is HTML, editable in the dashboard.
+CREATE TABLE pages (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    slug       VARCHAR(120) NOT NULL UNIQUE,
+    title      VARCHAR(200) NOT NULL,
+    body       MEDIUMTEXT   NOT NULL,
+    is_active  TINYINT(1)   NOT NULL DEFAULT 1,
+    updated_at DATETIME     NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Dashboard users.
+CREATE TABLE admin_users (
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    username      VARCHAR(60)  NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    name          VARCHAR(120) NOT NULL DEFAULT '',
+    created_at    DATETIME     NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- TODO: blog / news.
