@@ -49,3 +49,25 @@ function post_date(?string $dt): string {
     $ts = strtotime($dt);
     return $ts ? date('j M Y', $ts) : '';
 }
+
+/* ---------------- dashboard (admin) helpers ---------------- */
+
+/** All posts incl. drafts, newest first. */
+function get_all_posts(): array {
+    return q('SELECT * FROM posts ORDER BY id DESC');
+}
+
+/** One post by id, or null. */
+function get_post_by_id(int $id): ?array {
+    return q1('SELECT * FROM posts WHERE id = :id', ['id' => $id]);
+}
+
+/** Ensure a post slug is unique. */
+function unique_post_slug(string $slug, int $ignore_id = 0): string {
+    $slug = $slug !== '' ? $slug : 'post';
+    $base = $slug; $i = 2;
+    while (q1('SELECT id FROM posts WHERE slug = :s AND id <> :id', ['s' => $slug, 'id' => $ignore_id])) {
+        $slug = $base . '-' . $i++;
+    }
+    return $slug;
+}

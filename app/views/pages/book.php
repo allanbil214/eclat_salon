@@ -68,7 +68,8 @@ $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id'
             <h3>Visit the studio</h3>
             <div class="aside-block">
                 <div class="lbl">Where</div>
-                <div class="val"><?= e(get_setting('address_line1')) ?><br><?= e(get_setting('address_line2')) ?></div>
+                <div class="val"><?= ($addr = get_setting('address')) ? nl2br(e($addr)) : '—' ?></div>
+                <?php if ($map = get_setting('map_url')): ?><a class="val" href="<?= e($map) ?>" target="_blank" rel="noopener">Get directions ↗</a><?php endif; ?>
             </div>
             <div class="aside-block">
                 <div class="lbl">Get in touch</div>

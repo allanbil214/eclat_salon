@@ -36,3 +36,28 @@ function get_featured_services(int $limit = 4): array {
               WHERE s.is_active = 1 AND s.is_featured = 1
               ORDER BY s.sort_order ASC LIMIT ' . (int) $limit);
 }
+
+/* ---------------- dashboard (admin) helpers ---------------- */
+function get_all_service_categories(): array {
+    return q('SELECT c.*, (SELECT COUNT(*) FROM services s WHERE s.category_id = c.id) AS item_count
+              FROM service_categories c ORDER BY c.sort_order ASC, c.id ASC');
+}
+function get_service_category_by_id(int $id): ?array {
+    return q1('SELECT * FROM service_categories WHERE id = :id', ['id' => $id]);
+}
+function unique_service_slug(string $slug, int $ignore_id = 0): string {
+    $slug = $slug !== '' ? $slug : 'category';
+    $base = $slug; $i = 2;
+    while (q1('SELECT id FROM service_categories WHERE slug = :s AND id <> :id', ['s' => $slug, 'id' => $ignore_id])) {
+        $slug = $base . '-' . $i++;
+    }
+    return $slug;
+}
+function get_all_services(): array {
+    return q('SELECT s.*, c.name AS category_name FROM services s
+              JOIN service_categories c ON c.id = s.category_id
+              ORDER BY c.sort_order ASC, s.sort_order ASC, s.id ASC');
+}
+function get_service_by_id(int $id): ?array {
+    return q1('SELECT * FROM services WHERE id = :id', ['id' => $id]);
+}

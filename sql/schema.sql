@@ -128,9 +128,11 @@ CREATE TABLE testimonials (
 
 -- Product brands (marquee).
 CREATE TABLE brands (
-    id         INT AUTO_INCREMENT PRIMARY KEY,
-    name       VARCHAR(80) NOT NULL,
-    sort_order INT         NOT NULL DEFAULT 0
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    name        VARCHAR(80)  NOT NULL,
+    logo_url    VARCHAR(400) NOT NULL DEFAULT '',
+    website_url VARCHAR(255) NOT NULL DEFAULT '',
+    sort_order  INT          NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Booking enquiries captured by the Book form (the future dashboard reads these).
@@ -211,7 +213,7 @@ CREATE TABLE products (
     name        VARCHAR(160) NOT NULL,
     slug        VARCHAR(200) NOT NULL UNIQUE,
     brand       VARCHAR(80)  NOT NULL DEFAULT '',
-    description VARCHAR(500) NOT NULL DEFAULT '',
+    description TEXT         NOT NULL,
     price       DECIMAL(10,2) NULL,
     image_url   VARCHAR(400) NOT NULL DEFAULT '',
     in_stock    TINYINT(1)   NOT NULL DEFAULT 1,

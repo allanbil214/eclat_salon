@@ -42,3 +42,28 @@ function whatsapp_booking_url(array $d, string $service_name = ''): string {
 
     return 'https://wa.me/' . $number . '?text=' . rawurlencode(implode("\n", $lines));
 }
+
+/* ---------------- dashboard (admin) helpers ---------------- */
+function get_booking_requests(): array {
+    return q('SELECT b.*, s.name AS service_name FROM booking_requests b
+              LEFT JOIN services s ON s.id = b.service_id
+              ORDER BY b.created_at DESC, b.id DESC');
+}
+function get_booking_request_by_id(int $id): ?array {
+    return q1('SELECT b.*, s.name AS service_name FROM booking_requests b
+               LEFT JOIN services s ON s.id = b.service_id WHERE b.id = :id', ['id' => $id]);
+}
+/** wa.me link to reply to the customer (Indonesian). Uses wa_number() from orders model. */
+function whatsapp_booking_reply_url(array $b): string {
+    $number = wa_number((string) ($b['phone'] ?? ''));
+    if ($number === '') return '';
+    $name = trim((string) $b['name']);
+    $lines = [
+        'Halo ' . ($name !== '' ? $name : 'Kak') . '! Terima kasih sudah menghubungi ÉCLAT.',
+    ];
+    if (!empty($b['service_name'])) $lines[] = 'Layanan: ' . $b['service_name'];
+    if (!empty($b['preferred_date'])) $lines[] = 'Tanggal yang diminta: ' . $b['preferred_date'];
+    $lines[] = '';
+    $lines[] = 'Kami ingin membantu mengatur jadwal Anda.';
+    return 'https://wa.me/' . $number . '?text=' . rawurlencode(implode("\n", $lines));
+}

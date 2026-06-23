@@ -34,8 +34,8 @@ $tt = get_setting('tiktok');    $yt = get_setting('youtube');
             <div class="footer-col">
                 <h4>Visit</h4>
                 <ul>
-                    <li><?= e(get_setting('address_line1')) ?></li>
-                    <li><?= e(get_setting('address_line2')) ?></li>
+                    <?php if ($addr = get_setting('address')): ?><li><?= nl2br(e($addr)) ?></li><?php endif; ?>
+                    <?php if ($map = get_setting('map_url')): ?><li><a href="<?= e($map) ?>" target="_blank" rel="noopener">Get directions ↗</a></li><?php endif; ?>
                     <li><a href="tel:<?= e(preg_replace('/[^0-9+]/', '', get_setting('phone'))) ?>"><?= e(get_setting('phone')) ?></a></li>
                     <li><a href="mailto:<?= e(get_setting('email')) ?>"><?= e(get_setting('email')) ?></a></li>
                 </ul>

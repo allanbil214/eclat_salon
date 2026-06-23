@@ -35,7 +35,7 @@
                 <div class="pd-stock <?= $product['in_stock'] ? 'in' : 'out' ?>">
                     <?= $product['in_stock'] ? '● In stock — available in-salon' : '● Currently out of stock' ?>
                 </div>
-                <p class="pd-desc"><?= e($product['description']) ?></p>
+                <div class="pd-desc"><?= $product['description'] ?></div>
 
                 <div class="pd-actions">
                     <?php if ($product['in_stock']): ?>

@@ -32,7 +32,7 @@
                     <div class="product-body">
                         <span class="product-brand"><?= e($p['brand']) ?></span>
                         <h3 class="product-name"><a href="<?= e(url('shop/' . $p['slug'])) ?>"><?= e($p['name']) ?></a></h3>
-                        <p class="product-desc"><?= e($p['description']) ?></p>
+                        <p class="product-desc"><?= e(trim(strip_tags($p['description']))) ?></p>
                         <div class="product-foot">
                             <span class="product-price"><?= e(money((float) $p['price'])) ?></span>
                             <?php if ($p['in_stock']): ?>

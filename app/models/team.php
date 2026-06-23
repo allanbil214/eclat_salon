@@ -7,3 +7,11 @@ function get_team(?int $limit = null): array {
     if ($limit !== null) $sql .= ' LIMIT ' . (int) $limit;
     return q($sql);
 }
+
+/* ---------------- dashboard (admin) helpers ---------------- */
+function get_all_team(): array {
+    return q('SELECT * FROM team ORDER BY sort_order ASC, id ASC');
+}
+function get_team_member_by_id(int $id): ?array {
+    return q1('SELECT * FROM team WHERE id = :id', ['id' => $id]);
+}

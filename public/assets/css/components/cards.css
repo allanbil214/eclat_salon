@@ -137,3 +137,10 @@ a.product-media { display: block; }
 .product-wa { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; gap: 0.5em; transition: gap var(--dur-fast) var(--ease); }
 .product-wa:hover { gap: 0.9em; }
 .product-wa.muted { color: var(--text-3); }
+
+/* Brand marquee — logo + link support */
+.marquee__item { display: inline-flex; align-items: center; text-decoration: none; }
+.marquee__name { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.7rem); font-weight: 400; color: var(--text-3); letter-spacing: 0.04em; white-space: nowrap; transition: color var(--dur-fast) var(--ease); }
+.marquee__item:hover .marquee__name { color: var(--text); }
+.marquee__item img { height: clamp(26px, 3.4vw, 40px); width: auto; opacity: 0.6; transition: opacity var(--dur-fast) var(--ease); }
+.marquee__item:hover img { opacity: 1; }

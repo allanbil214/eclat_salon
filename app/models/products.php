@@ -33,6 +33,34 @@ function get_product_by_slug(string $slug): ?array {
     return q1('SELECT * FROM products WHERE slug = :slug', ['slug' => $slug]);
 }
 
+/** One product by id (dashboard). */
+function get_product_by_id(int $id): ?array {
+    return q1('SELECT * FROM products WHERE id = :id', ['id' => $id]);
+}
+
+/** Gallery rows (id + url + order) for editing. */
+function get_product_images_rows(int $product_id): array {
+    return q('SELECT id, image_url, sort_order FROM product_images WHERE product_id = :id ORDER BY sort_order ASC, id ASC',
+        ['id' => $product_id]);
+}
+
+/** Make a URL-safe slug from arbitrary text. */
+function slugify(string $text): string {
+    $text = strtolower(trim($text));
+    $text = preg_replace('/[^a-z0-9]+/', '-', $text) ?? '';
+    return trim($text, '-');
+}
+
+/** Ensure a product slug is unique (appends -2, -3, … if needed). */
+function unique_product_slug(string $slug, int $ignore_id = 0): string {
+    $slug = $slug !== '' ? $slug : 'product';
+    $base = $slug; $i = 2;
+    while (q1('SELECT id FROM products WHERE slug = :s AND id <> :id', ['s' => $slug, 'id' => $ignore_id])) {
+        $slug = $base . '-' . $i++;
+    }
+    return $slug;
+}
+
 /** All gallery images for a product: the main image first, then the extras. */
 function get_product_gallery(array $product): array {
     $images = [];

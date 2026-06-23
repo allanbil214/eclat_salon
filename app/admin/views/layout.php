@@ -7,7 +7,10 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf" content="<?= e(csrf_token()) ?>">
+    <meta name="upload-url" content="<?= e(admin_url('upload')) ?>">
     <title><?= e(($title ?? 'Admin') . ' — ÉCLAT Admin') ?></title>
+    <?php if (!empty($quill)): ?><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"><?php endif; ?>
     <?= css('admin') ?>
 </head>
 <body class="adm<?= $chrome ? '' : ' adm--bare' ?>">
@@ -30,6 +33,7 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
             <?php require $admin_view_file; ?>
         </main>
     </div>
+    <?php require ADMIN_PATH . '/views/partials/image_modal.php'; ?>
 <?php else: ?>
     <main class="adm-bare">
         <?php require ADMIN_PATH . '/views/partials/flash.php'; ?>
@@ -37,5 +41,7 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
     </main>
 <?php endif; ?>
     <?= js('admin') ?>
+    <?php if (!empty($quill)): ?><script defer src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script><?php endif; ?>
+    <?= js('admin-forms') ?>
 </body>
 </html>

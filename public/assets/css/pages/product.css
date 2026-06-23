@@ -36,3 +36,9 @@
 .pd-lightbox.open { display: grid; }
 .pd-lightbox img { max-width: 92vw; max-height: 90vh; border-radius: var(--radius); }
 .pd-lightbox .close { position: absolute; top: 22px; right: 26px; color: #fff; font-size: 1.6rem; line-height: 1; }
+
+/* rich (Quill) description on the product page */
+.pd-desc p { margin: 0 0 0.8em; }
+.pd-desc p:last-child { margin-bottom: 0; }
+.pd-desc ul, .pd-desc ol { margin: 0 0 0.8em; padding-left: 1.3em; }
+.pd-desc a { color: var(--accent); text-decoration: underline; }

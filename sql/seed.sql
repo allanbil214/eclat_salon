@@ -239,3 +239,8 @@ INSERT INTO promotions (title, detail, cta_label, cta_url, is_active, sort_order
 
 INSERT INTO gift_vouchers (code, amount, purchaser, recipient, created_at) VALUES
 ('ECLAT-GIFT-DEMO', 500000, 'Demo Purchaser', 'Demo Recipient', '2026-06-01 12:00:00');
+
+-- Location settings (added in Phase 5)
+INSERT INTO settings (skey, svalue) VALUES
+('address', 'Jl. Senopati No. 1, Kebayoran Baru, Jakarta Selatan'),
+('map_url', '');

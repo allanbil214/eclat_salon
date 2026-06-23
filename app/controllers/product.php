@@ -11,7 +11,7 @@ if (!$product) {
 
 render('product', [
     'title'    => $product['brand'] . ' ' . $product['name'] . ' — ' . get_setting('site_name_full'),
-    'meta'     => $product['description'],
+    'meta'     => trim(strip_tags($product['description'])),
     'active'   => 'shop',
     'solid_header' => true,
     'css'      => ['shop', 'product'],
