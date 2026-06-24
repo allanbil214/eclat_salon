@@ -2,5 +2,8 @@
 .masonry .tile { aspect-ratio: auto; break-inside: avoid; margin-bottom: clamp(14px, 1.6vw, 24px); }
 .masonry .tile img { height: auto; }
 .masonry .tile.hide { display: none; }
+/* Before/after inside masonry — let the image dictate height naturally */
+.masonry .tile .ba { position: relative; width: 100%; }
+.masonry .tile .ba img { width: 100%; height: auto; object-fit: unset; }
 @media (max-width: 900px) { .masonry { columns: 2; } }
 @media (max-width: 560px) { .masonry { columns: 1; } }

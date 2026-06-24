@@ -22,7 +22,19 @@
         <div class="masonry">
             <?php foreach ($items as $g): ?>
                 <figure class="tile reveal" data-category="<?= e($g['category_slug']) ?>">
-                    <img src="<?= e(image($g['image_url'])) ?>" alt="<?= e($g['title']) ?>" loading="lazy">
+                    <?php if (!empty($g['before_image_url'])): ?>
+                        <div class="ba" style="--pos:50%">
+                            <img class="before" src="<?= e(image($g['before_image_url'])) ?>" alt="Before">
+                            <span class="tag before">Before</span>
+                            <div class="ba-after">
+                                <img class="after" src="<?= e(image($g['image_url'])) ?>" alt="After: <?= e($g['title']) ?>">
+                                <span class="tag after">After</span>
+                            </div>
+                            <div class="handle"><span class="grip" aria-hidden="true">⇄</span></div>
+                        </div>
+                    <?php else: ?>
+                        <img src="<?= e(image($g['image_url'])) ?>" alt="<?= e($g['title']) ?>" loading="lazy">
+                    <?php endif; ?>
                     <figcaption class="meta">
                         <span class="cat"><?= e($g['category_name']) ?></span>
                         <span class="ttl"><?= e($g['title']) ?></span>
