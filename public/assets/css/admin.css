@@ -1,6 +1,6 @@
 /* ÉCLAT dashboard — self-contained. Light is the default; dark via [data-theme]. */
 :root {
-  --a-bg: #f3efe7; --a-bg2: #ffffff; --a-bg3: #efeae0;
+  --a-bg: #f5f5f5; --a-bg2: #ffffff; --a-bg3: #efefef;
   --a-line: #e4ded2; --a-line2: #d3cbbb;
   --a-text: #1b1813; --a-text2: #5c554a; --a-text3: #8d8576;
   --a-accent: #9a7637; --a-accent-ink: #ffffff;
