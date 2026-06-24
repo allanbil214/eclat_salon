@@ -234,20 +234,4 @@
     });
   }
 
-  /* ------------------------------------------------------------------ */
-  /* Home lookbook — standalone, close-only                              */
-  /* ------------------------------------------------------------------ */
-
-  /* Matches <a class="tile" data-lightbox> direct children of .grid-3  */
-  var homeTiles = document.querySelectorAll('.grid-3 > [data-lightbox]');
-
-  if (homeTiles.length) {
-    homeTiles.forEach(function (tile) {
-      tile.addEventListener('click', function (e) {
-        e.preventDefault();
-        open([tile], 0);
-      });
-    });
-  }
-
-})();
+})();;

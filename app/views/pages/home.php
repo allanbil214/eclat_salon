@@ -159,7 +159,7 @@
         </div>
         <div class="grid grid-3">
             <?php foreach ($gallery as $i => $g): ?>
-                <a class="tile reveal" href="<?= e(url('gallery')) ?>" data-lightbox style="--d:<?= number_format(($i % 3) * 0.06, 2) ?>s">
+                <a class="tile reveal" href="<?= e(url('gallery')) ?>" style="--d:<?= number_format(($i % 3) * 0.06, 2) ?>s">
                     <img src="<?= e(image($g['image_url'])) ?>" alt="<?= e($g['title']) ?>" loading="lazy">
                     <span class="meta">
                         <span class="cat"><?= e($g['category_name']) ?></span>
