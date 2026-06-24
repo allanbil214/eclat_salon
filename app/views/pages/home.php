@@ -83,22 +83,31 @@
             <h2 style="margin-top:22px">Drag to see the transformation</h2>
             <p class="lede">Real ÉCLAT work. Pull the handle across to reveal before and after.</p>
         </div>
-        <div class="grid grid-3">
-            <?php foreach ($transformations as $i => $t): ?>
-                <div class="reveal" style="--d:<?= number_format($i * 0.08, 2) ?>s">
-                    <div class="ba" style="--pos:50%">
-                        <span class="tag before">Before</span>
-                        <span class="tag after">After</span>
-                        <img class="before" src="<?= e(image($t['before_image_url'])) ?>" alt="Before">
-                        <img class="after" src="<?= e(image($t['image_url'])) ?>" alt="After: <?= e($t['title']) ?>">
-                        <div class="handle"><span class="grip" aria-hidden="true">⇄</span></div>
+        <?php $baCarousel = count($transformations) > 3; ?>
+        <div class="ba-carousel<?= $baCarousel ? ' is-carousel' : '' ?>"<?= $baCarousel ? ' data-ba-carousel' : '' ?>>
+            <div class="ba-track">
+                <?php foreach ($transformations as $i => $t): ?>
+                    <div class="ba-slide reveal" style="--d:<?= number_format($i * 0.08, 2) ?>s">
+                        <div class="ba" style="--pos:50%">
+                            <img class="before" src="<?= e(image($t['before_image_url'])) ?>" alt="Before">
+                            <span class="tag before">Before</span>
+                            <div class="ba-after">
+                                <img class="after" src="<?= e(image($t['image_url'])) ?>" alt="After: <?= e($t['title']) ?>">
+                                <span class="tag after">After</span>
+                            </div>
+                            <div class="handle"><span class="grip" aria-hidden="true">⇄</span></div>
+                        </div>
+                        <div class="ba-caption">
+                            <span class="t"><?= e($t['title']) ?></span>
+                            <?php if ($t['stylist_name']): ?><span class="b">by <?= e($t['stylist_name']) ?></span><?php endif; ?>
+                        </div>
                     </div>
-                    <div class="ba-caption">
-                        <span class="t"><?= e($t['title']) ?></span>
-                        <?php if ($t['stylist_name']): ?><span class="b">by <?= e($t['stylist_name']) ?></span><?php endif; ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+            <?php if ($baCarousel): ?>
+                <button class="ba-nav ba-prev" type="button" aria-label="Previous" data-ba-prev>‹</button>
+                <button class="ba-nav ba-next" type="button" aria-label="Next" data-ba-next>›</button>
+            <?php endif; ?>
         </div>
     </div>
 </section>

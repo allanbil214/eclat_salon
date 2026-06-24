@@ -17,14 +17,36 @@
 .acc-panel__inner { padding-bottom: 26px; color: var(--text-2); max-width: 60ch; }
 
 /* Before / after reveal */
-.ba { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-lg); user-select: none; touch-action: none; background: var(--bg-3); }
+.ba { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-lg); user-select: none; background: var(--bg-3); }
 .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-.ba .after { clip-path: inset(0 0 0 var(--pos, 50%)); }
+.ba .after { /* image fills its clipped layer */ }
+.ba-after { position: absolute; inset: 0; z-index: 3; clip-path: inset(0 0 0 var(--pos, 50%)); }
 .ba .tag { position: absolute; top: 16px; z-index: 3; font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; background: rgba(8,7,10,0.6); padding: 5px 10px; border-radius: 2px; backdrop-filter: blur(4px); }
+.ba > .tag.before { z-index: 2; }
 .ba .tag.before { left: 16px; }
 .ba .tag.after { right: 16px; }
-.ba .handle { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; background: var(--accent); z-index: 4; transform: translateX(-50%); }
-.ba .handle .grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; box-shadow: var(--shadow); font-size: 0.9rem; }
+.ba .handle { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; background: var(--accent); z-index: 4; transform: translateX(-50%); touch-action: none; cursor: ew-resize; }
+.ba .handle .grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; box-shadow: var(--shadow); font-size: 0.9rem; cursor: ew-resize; }
+.ba .handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 40px; transform: translateX(-50%); }
 .ba-caption { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 18px; }
 .ba-caption .t { font-family: var(--font-display); font-size: 1.2rem; }
 .ba-caption .b { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+
+/* before/after layout: grid by default, horizontal carousel when >3 */
+.ba-carousel { position: relative; }
+.ba-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.is-carousel .ba-track { display: flex; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; gap: 24px; padding-bottom: 6px; scrollbar-width: none; }
+.is-carousel .ba-track::-webkit-scrollbar { display: none; }
+.is-carousel .ba-slide { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
+.ba-carousel { padding-inline: 60px; }
+.ba-nav { position: absolute; top: 38%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--text); color: var(--bg); display: none; place-items: center; cursor: pointer; z-index: 5; font-size: 1.5rem; line-height: 1; box-shadow: var(--shadow); transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.is-carousel .ba-nav { display: grid; }
+.ba-nav:hover { opacity: 0.8; transform: translateY(-50%) scale(1.08); }
+.ba-prev { left: 0; }
+.ba-next { right: 0; }
+@media (max-width: 980px) { .ba-track { grid-template-columns: repeat(2, 1fr); } .is-carousel .ba-slide { flex-basis: calc((100% - 24px) / 2); } }
+@media (max-width: 680px) {
+  .ba-track { grid-template-columns: 1fr; }
+  .is-carousel .ba-slide { flex-basis: 86%; }
+  .is-carousel .ba-nav { display: none; }
+}
