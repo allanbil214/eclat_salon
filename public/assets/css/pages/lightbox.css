@@ -160,7 +160,7 @@
 }
 
 @media (max-width: 680px) {
-  .lb-stage { padding: 64px 12px; }
+  .lb-stage { padding: 64px 12px; flex-direction: column; }
   .lb-prev { left: 4px; }
   .lb-next { right: 4px; }
   .lb-media .ba { max-width: 100%; max-height: calc(100dvh - 130px); }
