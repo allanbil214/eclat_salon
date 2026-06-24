@@ -21,7 +21,7 @@
 
         <div class="masonry">
             <?php foreach ($items as $g): ?>
-                <figure class="tile reveal" data-category="<?= e($g['category_slug']) ?>">
+                <figure class="tile reveal" data-category="<?= e($g['category_slug']) ?>" data-lightbox>
                     <?php if (!empty($g['before_image_url'])): ?>
                         <div class="ba" style="--pos:50%">
                             <img class="before" src="<?= e(image($g['before_image_url'])) ?>" alt="Before">
