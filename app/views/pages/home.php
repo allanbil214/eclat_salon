@@ -1,7 +1,20 @@
 <?php /** Home page. Vars from HomeController: $stats $featured $transformations $team $gallery $testimonials */ ?>
 
 <section class="hero">
-    <div class="hero-bg"><img src="<?= e(url('assets/img/hero/home-hero.jpg')) ?>" alt="" aria-hidden="true"></div>
+    <div class="hero-slides" aria-hidden="true">
+        <?php if (!empty($hero_slides)): ?>
+            <?php foreach ($hero_slides as $slide): ?>
+                <div class="hero-slide">
+                    <img src="<?= e(image($slide['image_url'])) ?>" alt="">
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="hero-slide">
+                <img src="<?= e(url('assets/img/hero/home-hero.jpg')) ?>" alt="">
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="hero-bg-overlay"></div>
     <div class="container hero-inner">
         <span class="eyebrow"><?= e(get_setting('hero_eyebrow')) ?></span>
         <h1><?= e(get_setting('hero_title')) ?></h1>
@@ -16,6 +29,13 @@
         <span class="lbl">★ from 2,400+ reviews</span>
     </div>
     <div class="scroll-hint"><span>Scroll</span><span class="line"></span></div>
+    <?php if (!empty($hero_slides) && count($hero_slides) > 1): ?>
+        <div class="hero-dots" aria-hidden="true">
+            <?php foreach ($hero_slides as $slide): ?>
+                <button class="hero-dot" type="button"></button>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </section>
 
 <?php partial('marquee'); ?>

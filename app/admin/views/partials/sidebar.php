@@ -7,6 +7,7 @@ $nav = [
     'services'     => ['Services', admin_url('services')],
     'team'         => ['Team', admin_url('team')],
     'gallery'      => ['Gallery', admin_url('gallery')],
+    'hero_slides'  => ['Hero Slides', admin_url('hero-slides')],
     'articles'     => ['Articles', admin_url('articles')],
     'pages'        => ['Pages', admin_url('pages')],
     'testimonials' => ['Testimonials', admin_url('testimonials')],

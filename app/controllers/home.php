@@ -5,7 +5,8 @@ render('home', [
     'meta'   => get_setting('hero_lead'),
     'active' => 'home',
     'css'    => ['home'],
-    'js'     => ['pages/gallery'],            // enables the before/after sliders
+    'js'     => ['pages/gallery', 'pages/hero-slideshow'],
+    'hero_slides'    => get_hero_slides(),
     'stats'          => get_stats(4),
     'featured'       => get_featured_services(5),
     'transformations'=> get_transformations(12),
