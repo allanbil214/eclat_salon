@@ -40,6 +40,12 @@ if ($controller === null && preg_match('#^/blog/([a-z0-9][a-z0-9-]*)$#', $path, 
     $controller = 'article';
 }
 
+// Dynamic: /outlet/{slug} → single outlet page.
+if ($controller === null && preg_match('#^/outlet/([a-z0-9][a-z0-9-]*)$#', $path, $m)) {
+    $_GET['slug'] = $m[1];
+    $controller = 'outlet';
+}
+
 // Catch-all: a single-segment path may be a static page (e.g. /privacy).
 // The page controller renders it, or 404s if there is no such page.
 if ($controller === null && preg_match('#^/([a-z0-9][a-z0-9-]*)$#', $path, $m)) {

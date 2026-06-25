@@ -5,7 +5,7 @@ render('home', [
     'meta'   => get_setting('hero_lead'),
     'active' => 'home',
     'css'    => ['home'],
-    'js'     => ['pages/gallery', 'pages/hero-slideshow'],
+    'js'     => ['pages/gallery', 'pages/hero-slideshow', 'pages/outlets'],
     'hero_slides'    => get_hero_slides(),
     'stats'          => get_stats(4),
     'featured'       => get_featured_services(5),
@@ -15,4 +15,5 @@ render('home', [
     'testimonials'   => get_testimonials(6),
     'shop_products'  => get_featured_products(4),
     'articles'       => get_recent_posts(3),
+    'outlets'        => get_active_outlets(4),
 ]);

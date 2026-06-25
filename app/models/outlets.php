@@ -1,0 +1,25 @@
+<?php
+/** Outlets / Cabang — branch locations. */
+declare(strict_types=1);
+
+/* ---------- public helpers ---------- */
+
+function get_active_outlets(?int $limit = null): array {
+    $sql = 'SELECT * FROM outlets WHERE is_active = 1 ORDER BY sort_order ASC, id ASC';
+    if ($limit !== null) $sql .= ' LIMIT ' . (int) $limit;
+    return q($sql);
+}
+
+function get_outlet_by_slug(string $slug): ?array {
+    return q1('SELECT * FROM outlets WHERE slug = :slug AND is_active = 1', ['slug' => $slug]);
+}
+
+/* ---------- admin helpers ---------- */
+
+function get_all_outlets(): array {
+    return q('SELECT * FROM outlets ORDER BY sort_order ASC, id ASC');
+}
+
+function get_outlet_by_id(int $id): ?array {
+    return q1('SELECT * FROM outlets WHERE id = :id', ['id' => $id]);
+}

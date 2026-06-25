@@ -17,4 +17,5 @@ return [
     '/faq'      => 'faq',
     '/book'     => 'book',
     '/booked'   => 'booked',
+    '/outlets'  => 'outlets',
 ];

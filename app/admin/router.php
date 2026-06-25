@@ -93,6 +93,11 @@ $admin_routes = [
     '/bookings'        => 'bookings/index',
     '/bookings/view'   => 'bookings/view',
     '/bookings/delete' => 'bookings/delete',
+    '/outlets'         => 'outlets/index',
+    '/outlets/new'     => 'outlets/form',
+    '/outlets/edit'    => 'outlets/form',
+    '/outlets/save'    => 'outlets/save',
+    '/outlets/delete'  => 'outlets/delete',
 ];
 
 // Auth guard first (except the login screen) — guests never see the admin chrome.

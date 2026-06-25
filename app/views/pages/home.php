@@ -188,4 +188,6 @@
 
 <?php partial('posts-strip', ['posts' => $articles, 'eyebrow' => 'Article', 'heading' => 'From the studio']); ?>
 
+<?php partial('outlets-strip', ['outlets' => $outlets, 'eyebrow' => 'Find us', 'heading' => 'Our Locations']); ?>
+
 <?php partial('cta'); ?>

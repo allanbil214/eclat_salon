@@ -1,0 +1,267 @@
+/* =============================================
+   Outlets — cards, carousel, listing, detail
+   ============================================= */
+
+/* ---- Carousel wrap ---- */
+.outlets-carousel-wrap {
+    position: relative;
+    overflow: hidden;
+    padding: 0 var(--gutter);
+    margin-top: 48px;
+}
+
+.outlets-track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.55s var(--ease);
+    will-change: transform;
+}
+
+/* ---- Card base ---- */
+.outlet-card {
+    flex: 0 0 calc(33.333% - 16px);
+    min-width: 280px;
+    background: var(--bg-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.outlet-card-img {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--bg-2);
+}
+
+.outlet-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: var(--img-filter);
+    transition: transform 0.65s var(--ease);
+}
+
+.outlet-card:hover .outlet-card-img img {
+    transform: scale(1.04);
+}
+
+.outlet-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--text-3);
+    background: var(--bg-2);
+}
+
+.outlet-card-placeholder--lg {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    font-size: 4rem;
+}
+
+.outlet-card-body {
+    padding: 22px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+}
+
+.outlet-card-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.outlet-card-city {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+}
+
+.outlet-card-addr {
+    font-size: 0.86rem;
+    color: var(--text-2);
+    margin: 4px 0 0;
+    line-height: 1.55;
+    flex: 1;
+}
+
+.outlet-card-phone {
+    font-size: 0.86rem;
+    color: var(--text-2);
+    margin: 2px 0 0;
+}
+
+.outlet-card-phone a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.outlet-card-phone a:hover { color: var(--accent); }
+
+/* ---- Action row ---- */
+.outlet-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.outlet-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--text-2);
+    transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+    flex-shrink: 0;
+}
+
+.outlet-action--map:hover {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}
+
+.outlet-action--wa:hover {
+    background: #25d366;
+    color: #fff;
+    border-color: #25d366;
+}
+
+.outlet-card-link {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--text-2);
+    margin-left: auto;
+    transition: color var(--dur-fast);
+    white-space: nowrap;
+}
+
+.outlet-card-link:hover { color: var(--accent); }
+
+/* ---- Carousel nav buttons ---- */
+.outlets-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+    background: var(--bg-3);
+    color: var(--text);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--dur-fast), border-color var(--dur-fast);
+    z-index: 2;
+}
+
+.outlets-nav:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.outlets-prev { left: 12px; }
+.outlets-next { right: 12px; }
+
+/* ---- Outlets listing grid ---- */
+.outlets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.outlet-card--full {
+    flex: unset;
+    min-width: unset;
+}
+
+/* ---- Single outlet detail ---- */
+.outlet-detail {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(36px, 5vw, 80px);
+    align-items: start;
+}
+
+.outlet-detail-media {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+
+.outlet-detail-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: var(--img-filter);
+}
+
+.outlet-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.outlet-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.outlet-info-block p {
+    margin: 0;
+    color: var(--text-2);
+    line-height: 1.65;
+}
+
+.outlet-info-block a { color: var(--accent); }
+
+.outlet-detail-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.outlet-detail-ctas .btn i {
+    margin-right: 6px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+    .outlet-card {
+        flex: 0 0 calc(50% - 12px);
+    }
+}
+
+@media (max-width: 620px) {
+    .outlet-card {
+        flex: 0 0 82vw;
+    }
+
+    .outlets-nav { display: none; }
+
+    .outlet-detail {
+        grid-template-columns: 1fr;
+    }
+}

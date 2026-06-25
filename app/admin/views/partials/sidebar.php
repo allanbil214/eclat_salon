@@ -25,6 +25,7 @@ $nav = [
     // Team
     'team'         => ['Team', admin_url('team'), 'fa-solid fa-user-group'],
     'hours'        => ['Opening Hours', admin_url('hours'), 'fa-solid fa-clock'],
+    'outlets'      => ['Outlets', admin_url('outlets'), 'fa-solid fa-map-location-dot'],
 
     // System
     'stats'        => ['Stats', admin_url('stats'), 'fa-solid fa-chart-line'],
