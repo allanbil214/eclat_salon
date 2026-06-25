@@ -31,6 +31,9 @@ $core_js = ['core/preloader', 'core/theme-toggle', 'core/nav', 'core/reveal', 'c
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon"
+      type="image/svg+xml"
+      href="https://www.svgrepo.com/download/530645/scissors.svg">
 
     <?php foreach (array_merge($base_css, $component_css) as $sheet) echo css($sheet) . "\n    "; ?>
     <?php foreach ($css as $sheet) echo css('pages/' . $sheet) . "\n    "; ?>

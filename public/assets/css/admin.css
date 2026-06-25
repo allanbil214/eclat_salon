@@ -236,3 +236,226 @@ a.adm-chip.on:hover { background: color-mix(in srgb, var(--a-accent) 10%, transp
 .adm-settings-group .adm-field:last-child { margin-bottom: 0; }
 .adm-time { background: var(--a-bg); border: 1px solid var(--a-line2); border-radius: var(--a-radius-sm); padding: 8px 10px; color: var(--a-text); font: inherit; }
 .adm-time:focus { outline: none; border-color: var(--a-accent); }
+
+/* ---- Elite sidebar with icons ---- */
+.adm-side {
+  background: var(--a-bg2);
+  border-right: 1px solid var(--a-line);
+  padding: 26px 18px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom scrollbar */
+.adm-side::-webkit-scrollbar {
+  width: 4px;
+}
+.adm-side::-webkit-scrollbar-track {
+  background: transparent;
+}
+.adm-side::-webkit-scrollbar-thumb {
+  background: var(--a-line2);
+  border-radius: 10px;
+}
+.adm-side::-webkit-scrollbar-thumb:hover {
+  background: var(--a-accent);
+}
+
+.adm-nav {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+/* --- Groups --- */
+.adm-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 16px;
+}
+
+.adm-nav-group:not(:last-child)::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, var(--a-line), transparent);
+  margin: 10px 0 0 0;
+  opacity: 0.4;
+}
+
+.adm-nav-group-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--a-text3);
+  padding: 0 0 4px 0;
+  font-weight: 600;
+  opacity: 0.5;
+  font-family: var(--a-font);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adm-nav-group-label i {
+  font-size: 0.55rem;
+  opacity: 0.6;
+}
+
+/* --- Nav items with icons --- */
+.adm-nav a {
+  padding: 5px 0 5px 0;
+  border-radius: 0;
+  color: var(--a-text2);
+  font-size: 0.85rem;
+  font-weight: 450;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 0;
+}
+
+.adm-nav a i {
+  font-size: 0.85rem;
+  width: 18px;
+  text-align: center;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.adm-nav a:hover {
+  color: var(--a-text);
+  transform: translateX(4px);
+}
+
+.adm-nav a:hover i {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.adm-nav a.on {
+  background: transparent; /* REMOVED: background */
+  color: var(--a-accent); /* Just accent color, no background */
+  font-weight: 550;
+  box-shadow: none; /* REMOVED: shadow */
+  transform: translateX(6px);
+}
+
+.adm-nav a.on i {
+  opacity: 1;
+  color: var(--a-accent);
+}
+
+/* Active indicator bar */
+.adm-nav a.on::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--a-accent);
+  opacity: 1;
+}
+
+/* --- Brand --- */
+.adm-brand {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--a-line);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.adm-brand a {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--a-text);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.adm-brand span {
+  color: var(--a-accent);
+  font-size: 1.7rem;
+}
+
+.adm-brand small {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--a-text3);
+  margin-top: 2px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+/* --- Dark theme --- */
+[data-theme="dark"] .adm-nav a.on {
+  color: var(--a-accent);
+}
+
+[data-theme="dark"] .adm-nav a.on i {
+  color: var(--a-accent);
+}
+
+/* --- Mobile --- */
+@media (max-width: 760px) {
+  .adm-side {
+      position: static;
+      height: auto;
+      overflow-y: visible;
+      padding: 18px;
+  }
+  
+  .adm-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 4px;
+      flex: none;
+  }
+  
+  .adm-nav-group {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+  
+  .adm-nav-group::after {
+      display: none !important;
+  }
+  
+  .adm-nav a {
+      padding: 4px 0;
+      font-size: 0.82rem;
+      gap: 8px;
+  }
+  
+  .adm-nav a i {
+      font-size: 0.78rem;
+      width: 16px;
+  }
+  
+  .adm-nav a:hover,
+  .adm-nav a.on {
+      transform: none !important;
+  }
+  
+  .adm-nav a.on::before {
+      display: none;
+  }
+}

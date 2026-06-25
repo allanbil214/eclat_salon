@@ -10,6 +10,12 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
     <meta name="csrf" content="<?= e(csrf_token()) ?>">
     <meta name="upload-url" content="<?= e(admin_url('upload')) ?>">
     <title><?= e(($title ?? 'Admin') . ' — ÉCLAT Admin') ?></title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon"
+      type="image/svg+xml"
+      href="https://www.svgrepo.com/download/530645/scissors.svg">
+
     <?php if (!empty($quill)): ?><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"><?php endif; ?>
     <?= css('admin') ?>
 </head>
