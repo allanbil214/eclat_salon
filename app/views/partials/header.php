@@ -3,10 +3,10 @@
 $active = $active ?? '';
 $solid  = $solid  ?? false;
 $links = [
-    'home'     => ['Home', url('')],
     'about'    => ['About', url('about')],
     'services' => ['Services', url('services')],
     'gallery'  => ['Gallery', url('gallery')],
+    'outlets'  => ['Outlets', url('outlets')],
     'blog'     => ['Article', url('blog')],
     'shop'     => ['Shop', url('shop')],
 ];
