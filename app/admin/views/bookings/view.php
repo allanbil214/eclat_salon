@@ -8,6 +8,7 @@
         <dt>Name</dt><dd><?= e($b['name']) ?: '—' ?></dd>
         <dt>Phone</dt><dd><?= e($b['phone']) ?: '—' ?></dd>
         <dt>Email</dt><dd><?= e($b['email']) ?: '—' ?></dd>
+        <dt>Outlet</dt><dd><?= e($b['outlet_name'] ?? '') ?: '—' ?></dd>
         <dt>Service</dt><dd><?= e($b['service_name'] ?? '') ?: '—' ?></dd>
         <dt>Preferred</dt><dd><?= $b['preferred_date'] ? e(date('l, j F Y', strtotime((string) $b['preferred_date']))) : '—' ?></dd>
         <?php if ($b['message']): ?><dt>Message</dt><dd><?= nl2br(e($b['message'])) ?></dd><?php endif; ?>

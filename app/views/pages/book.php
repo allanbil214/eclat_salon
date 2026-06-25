@@ -1,6 +1,23 @@
-<?php /** Book page. Vars: $services $hours $errors $old */
+<?php /** Book page. Vars: $services $outlets $hours $errors $old */
 $errors  = $errors  ?? [];
-$old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id' => '', 'preferred_date' => '', 'message' => ''];
+$old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'outlet_id' => '', 'service_id' => '', 'preferred_date' => '', 'message' => ''];
+
+// Build outlets JSON for JS dynamic aside
+$outlets_json = json_encode(array_map(fn($o) => [
+    'id'        => (int) $o['id'],
+    'name'      => $o['name'],
+    'city'      => $o['city'],
+    'address'   => $o['address'],
+    'phone'     => $o['phone'],
+    'whatsapp'  => preg_replace('/\D/', '', $o['whatsapp']),
+    'gmaps_url' => $o['gmaps_url'],
+], $outlets), JSON_HEX_TAG | JSON_HEX_APOS);
+
+// Fallback (global settings) aside data
+$global_address  = get_setting('address');
+$global_map_url  = get_setting('map_url');
+$global_phone    = get_setting('phone');
+$global_email    = get_setting('email');
 ?>
 
 <section class="page-hero">
@@ -23,6 +40,21 @@ $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id'
             <form method="post" action="<?= e(url('book')) ?>" novalidate>
                 <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
                 <div class="form-grid">
+
+                    <!-- Outlet picker — first for UX context -->
+                    <div class="field full">
+                        <label for="outlet_id">Which location? <span class="req">*</span></label>
+                        <select id="outlet_id" name="outlet_id" data-outlet-picker required>
+                            <option value="">Select a location…</option>
+                            <?php foreach ($outlets as $o): ?>
+                                <option value="<?= (int) $o['id'] ?>" <?= (string) $old['outlet_id'] === (string) $o['id'] ? 'selected' : '' ?>>
+                                    <?= e($o['name']) ?> — <?= e($o['city']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (isset($errors['outlet_id'])): ?><span class="error-text"><?= e($errors['outlet_id']) ?></span><?php endif; ?>
+                    </div>
+
                     <div class="field">
                         <label for="name">Your name <span class="req">*</span></label>
                         <input id="name" name="name" type="text" value="<?= e($old['name']) ?>" placeholder="Jane Doe" required>
@@ -64,18 +96,43 @@ $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id'
             </form>
         </div>
 
-        <aside class="book-aside reveal" style="--d:.1s">
+        <aside class="book-aside reveal" style="--d:.1s" data-book-aside>
             <h3>Visit the studio</h3>
-            <div class="aside-block">
-                <div class="lbl">Where</div>
-                <div class="val"><?= ($addr = get_setting('address')) ? nl2br(e($addr)) : '—' ?></div>
-                <?php if ($map = get_setting('map_url')): ?><a class="val" href="<?= e($map) ?>" target="_blank" rel="noopener">Get directions ↗</a><?php endif; ?>
+
+            <!-- Dynamic outlet info (shown when outlet is selected) -->
+            <div data-aside-outlet style="display:none">
+                <div class="aside-block">
+                    <div class="lbl">Location</div>
+                    <div class="val" data-aside-name></div>
+                    <div class="val" data-aside-address style="margin-top:6px"></div>
+                    <a class="val" data-aside-map href="#" target="_blank" rel="noopener" style="display:none">Get directions ↗</a>
+                </div>
+                <div class="aside-block" data-aside-phone-block style="display:none">
+                    <div class="lbl">Phone</div>
+                    <a class="val" data-aside-phone href="#"></a>
+                </div>
+                <div class="aside-block" data-aside-wa-block style="display:none">
+                    <a class="btn btn-primary" data-aside-wa href="#" target="_blank" rel="noopener" style="width:100%;text-align:center">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp this outlet
+                    </a>
+                </div>
             </div>
-            <div class="aside-block">
-                <div class="lbl">Get in touch</div>
-                <a class="val" href="tel:<?= e(preg_replace('/[^0-9+]/', '', get_setting('phone'))) ?>"><?= e(get_setting('phone')) ?></a><br>
-                <a class="val" href="mailto:<?= e(get_setting('email')) ?>"><?= e(get_setting('email')) ?></a>
+
+            <!-- Fallback: global settings (shown when no outlet selected) -->
+            <div data-aside-fallback>
+                <div class="aside-block">
+                    <div class="lbl">Where</div>
+                    <div class="val"><?= $global_address ? nl2br(e($global_address)) : '—' ?></div>
+                    <?php if ($global_map_url): ?><a class="val" href="<?= e($global_map_url) ?>" target="_blank" rel="noopener">Get directions ↗</a><?php endif; ?>
+                </div>
+                <div class="aside-block">
+                    <div class="lbl">Get in touch</div>
+                    <a class="val" href="tel:<?= e(preg_replace('/[^0-9+]/', '', $global_phone)) ?>"><?= e($global_phone) ?></a><br>
+                    <a class="val" href="mailto:<?= e($global_email) ?>"><?= e($global_email) ?></a>
+                </div>
             </div>
+
+            <!-- Always shown -->
             <div class="aside-block">
                 <div class="lbl">Opening hours</div>
                 <?php foreach ($hours as $h): ?>
@@ -92,3 +149,63 @@ $old     = $old     ?? ['name' => '', 'email' => '', 'phone' => '', 'service_id'
         </aside>
     </div>
 </section>
+
+<script>
+(function () {
+  var outlets = <?= $outlets_json ?>;
+  var picker  = document.querySelector('[data-outlet-picker]');
+  var asideOutlet   = document.querySelector('[data-aside-outlet]');
+  var asideFallback = document.querySelector('[data-aside-fallback]');
+  if (!picker || !asideOutlet) return;
+
+  var elName    = document.querySelector('[data-aside-name]');
+  var elAddr    = document.querySelector('[data-aside-address]');
+  var elMap     = document.querySelector('[data-aside-map]');
+  var elPhBlock = document.querySelector('[data-aside-phone-block]');
+  var elPh      = document.querySelector('[data-aside-phone]');
+  var elWaBlock = document.querySelector('[data-aside-wa-block]');
+  var elWa      = document.querySelector('[data-aside-wa]');
+
+  function update() {
+    var id = parseInt(picker.value, 10);
+    var o  = outlets.find(function(x){ return x.id === id; });
+
+    if (!o) {
+      asideOutlet.style.display   = 'none';
+      asideFallback.style.display = '';
+      return;
+    }
+
+    asideFallback.style.display = 'none';
+    asideOutlet.style.display   = '';
+
+    elName.textContent = o.name;
+    elAddr.textContent = o.address;
+
+    if (o.gmaps_url) {
+      elMap.href = o.gmaps_url;
+      elMap.style.display = '';
+    } else {
+      elMap.style.display = 'none';
+    }
+
+    if (o.phone) {
+      elPh.textContent = o.phone;
+      elPh.href = 'tel:' + o.phone.replace(/\s/g, '');
+      elPhBlock.style.display = '';
+    } else {
+      elPhBlock.style.display = 'none';
+    }
+
+    if (o.whatsapp) {
+      elWa.href = 'https://wa.me/' + o.whatsapp;
+      elWaBlock.style.display = '';
+    } else {
+      elWaBlock.style.display = 'none';
+    }
+  }
+
+  picker.addEventListener('change', update);
+  update(); // run on load in case of re-submit with old value
+})();
+</script>

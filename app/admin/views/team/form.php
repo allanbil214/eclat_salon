@@ -1,5 +1,5 @@
-<?php /** Vars: $m */
-$x = $m ?? ['id'=>0,'name'=>'','role'=>'','specialty'=>'','bio'=>'','photo_url'=>'','instagram'=>'','years_exp'=>'','is_owner'=>0,'is_active'=>1,'sort_order'=>0];
+<?php /** Vars: $m, $outlets */
+$x = $m ?? ['id'=>0,'name'=>'','role'=>'','specialty'=>'','bio'=>'','photo_url'=>'','instagram'=>'','years_exp'=>'','is_owner'=>0,'is_active'=>1,'sort_order'=>0,'outlet_id'=>null];
 ?>
 <div class="adm-head"><h1 class="adm-h1"><?= $x['id'] ? 'Edit team member' : 'New team member' ?></h1><a class="adm-btn" href="<?= e(admin_url('team')) ?>">← Back</a></div>
 <form method="post" action="<?= e(admin_url('team/save')) ?>" class="adm-form adm-form--wide">
@@ -27,6 +27,17 @@ $x = $m ?? ['id'=>0,'name'=>'','role'=>'','specialty'=>'','bio'=>'','photo_url'=
         <label class="adm-field adm-field--sm"><span>Sort order</span><input type="number" name="sort_order" value="<?= (int) $x['sort_order'] ?>"></label>
         <label class="adm-check"><input type="checkbox" name="is_owner" value="1" <?= $x['is_owner'] ? 'checked' : '' ?>> Owner</label>
         <label class="adm-check"><input type="checkbox" name="is_active" value="1" <?= $x['is_active'] ? 'checked' : '' ?>> Active</label>
+    </div>
+    <div class="adm-field">
+        <span>Primary outlet <small>· which branch this stylist works at</small></span>
+        <select name="outlet_id">
+            <option value="">— Not assigned —</option>
+            <?php foreach ($outlets as $o): ?>
+                <option value="<?= (int) $o['id'] ?>" <?= (string) ($x['outlet_id'] ?? '') === (string) $o['id'] ? 'selected' : '' ?>>
+                    <?= e($o['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
     <div class="adm-form-actions"><button class="adm-btn adm-btn--primary" type="submit">Save team member</button><a class="adm-btn" href="<?= e(admin_url('team')) ?>">Cancel</a></div>
 </form>

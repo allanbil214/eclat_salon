@@ -5,14 +5,15 @@ declare(strict_types=1);
 function create_booking_request(array $d): bool {
     $stmt = db()->prepare(
         'INSERT INTO booking_requests
-            (name, email, phone, service_id, preferred_date, message, created_at)
-         VALUES (:name, :email, :phone, :service_id, :preferred_date, :message, :created_at)'
+            (name, email, phone, service_id, outlet_id, preferred_date, message, created_at)
+         VALUES (:name, :email, :phone, :service_id, :outlet_id, :preferred_date, :message, :created_at)'
     );
     return $stmt->execute([
         'name'           => $d['name'],
         'email'          => $d['email'],
         'phone'          => $d['phone'],
         'service_id'     => $d['service_id'] !== '' ? (int) $d['service_id'] : null,
+        'outlet_id'      => !empty($d['outlet_id']) ? (int) $d['outlet_id'] : null,
         'preferred_date' => $d['preferred_date'] !== '' ? $d['preferred_date'] : null,
         'message'        => $d['message'],
         'created_at'     => date('Y-m-d H:i:s'),
@@ -23,7 +24,7 @@ function create_booking_request(array $d): bool {
  * Build a wa.me link with the booking details pre-filled (Indonesian).
  * The number lives in settings → 'whatsapp' (digits only, e.g. 6281211988279).
  */
-function whatsapp_booking_url(array $d, string $service_name = ''): string {
+function whatsapp_booking_url(array $d, string $service_name = '', string $outlet_name = ''): string {
     $number = preg_replace('/\D+/', '', get_setting('whatsapp'));
     if ($number === '') {
         return '';
@@ -32,6 +33,7 @@ function whatsapp_booking_url(array $d, string $service_name = ''): string {
         'Halo ÉCLAT! Saya ingin membuat janji.',
         '',
         'Nama: '    . ($d['name'] !== '' ? $d['name'] : '-'),
+        'Outlet: '  . ($outlet_name !== '' ? $outlet_name : '-'),
         'Layanan: ' . ($service_name !== '' ? $service_name : '-'),
         'Tanggal: ' . (!empty($d['preferred_date']) ? $d['preferred_date'] : '-'),
     ];
@@ -45,13 +47,18 @@ function whatsapp_booking_url(array $d, string $service_name = ''): string {
 
 /* ---------------- dashboard (admin) helpers ---------------- */
 function get_booking_requests(): array {
-    return q('SELECT b.*, s.name AS service_name FROM booking_requests b
+    return q('SELECT b.*, s.name AS service_name, o.name AS outlet_name
+              FROM booking_requests b
               LEFT JOIN services s ON s.id = b.service_id
+              LEFT JOIN outlets o ON o.id = b.outlet_id
               ORDER BY b.created_at DESC, b.id DESC');
 }
 function get_booking_request_by_id(int $id): ?array {
-    return q1('SELECT b.*, s.name AS service_name FROM booking_requests b
-               LEFT JOIN services s ON s.id = b.service_id WHERE b.id = :id', ['id' => $id]);
+    return q1('SELECT b.*, s.name AS service_name, o.name AS outlet_name, o.whatsapp AS outlet_whatsapp
+               FROM booking_requests b
+               LEFT JOIN services s ON s.id = b.service_id
+               LEFT JOIN outlets o ON o.id = b.outlet_id
+               WHERE b.id = :id', ['id' => $id]);
 }
 /** wa.me link to reply to the customer (Indonesian). Uses wa_number() from orders model. */
 function whatsapp_booking_reply_url(array $b): string {
