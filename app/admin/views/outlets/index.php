@@ -13,6 +13,7 @@
             <th>Name</th>
             <th>City</th>
             <th>Phone</th>
+            <th class="w-min">Rating</th>
             <th class="w-min">Active</th>
             <th class="w-min">Order</th>
             <th class="w-min"></th>
@@ -31,6 +32,7 @@
             <td><strong><?= e($o['name']) ?></strong><br><small class="adm-muted">/outlet/<?= e($o['slug']) ?></small></td>
             <td class="adm-muted"><?= e($o['city']) ?: '—' ?></td>
             <td class="adm-muted"><?= e($o['phone']) ?: '—' ?></td>
+            <td class="adm-muted"><?= $o['google_rating'] !== null ? '⭐ ' . number_format((float)$o['google_rating'], 1) : '—' ?></td>
             <td class="adm-muted"><?= $o['is_active'] ? '✓' : '—' ?></td>
             <td class="adm-muted"><?= (int) $o['sort_order'] ?></td>
             <td class="adm-row-actions">

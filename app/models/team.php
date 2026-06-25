@@ -10,7 +10,10 @@ function get_team(?int $limit = null): array {
 
 /* ---------------- dashboard (admin) helpers ---------------- */
 function get_all_team(): array {
-    return q('SELECT * FROM team ORDER BY sort_order ASC, id ASC');
+    return q('SELECT t.*, o.name AS outlet_name
+              FROM team t
+              LEFT JOIN outlets o ON o.id = t.outlet_id
+              ORDER BY t.sort_order ASC, t.id ASC');
 }
 function get_team_member_by_id(int $id): ?array {
     return q1('SELECT * FROM team WHERE id = :id', ['id' => $id]);

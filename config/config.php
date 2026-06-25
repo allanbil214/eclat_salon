@@ -32,9 +32,9 @@ define('APP_DEBUG', env('APP_DEBUG', '1') === '1');
 define('DB_DRIVER',      env('DB_DRIVER', 'mysql'));
 define('DB_HOST',        env('DB_HOST', '127.0.0.1'));
 define('DB_PORT',        env('DB_PORT', '3306'));
-define('DB_NAME',        env('DB_NAME', 'eclat_salon'));
-define('DB_USER',        env('DB_USER', 'root'));
-define('DB_PASS',        env('DB_PASS', ''));
+define('DB_NAME',        env('DB_NAME', 'u180790219_eclat'));
+define('DB_USER',        env('DB_USER', 'u180790219_dani'));
+define('DB_PASS',        env('DB_PASS', 'Fusrodah214#'));
 define('DB_SQLITE_PATH', env('DB_SQLITE_PATH', ROOT_PATH . '/sql/eclat.sqlite'));
 
 date_default_timezone_set(APP_TZ);

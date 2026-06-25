@@ -33,6 +33,9 @@ function get_opening_hours_by_outlet(): array {
 
 /* ---------------- dashboard (admin) helpers ---------------- */
 function get_all_opening_hours(): array {
-    return q('SELECT id, day_order, day_name, open_time, close_time, is_closed
-              FROM opening_hours ORDER BY day_order ASC');
+    return q('SELECT h.id, h.outlet_id, o.name AS outlet_name,
+                     h.day_order, h.day_name, h.open_time, h.close_time, h.is_closed
+              FROM opening_hours h
+              LEFT JOIN outlets o ON o.id = h.outlet_id
+              ORDER BY COALESCE(h.outlet_id, 0) ASC, h.day_order ASC');
 }
