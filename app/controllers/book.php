@@ -29,11 +29,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 }
             }
 
-            // Look up chosen outlet name.
-            $outlet_name = '';
+            // Look up chosen outlet name + its own WhatsApp number.
+            $outlet_name     = '';
+            $outlet_whatsapp = '';
             foreach ($outlets as $out) {
                 if ((string) $out['id'] === (string) $old['outlet_id']) {
-                    $outlet_name = $out['name'];
+                    $outlet_name     = $out['name'];
+                    $outlet_whatsapp = $out['whatsapp'] ?? '';
                     break;
                 }
             }
@@ -42,7 +44,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 session_start();
             }
             $_SESSION['booking'] = [
-                'wa_url' => whatsapp_booking_url($old, $service_name, $outlet_name),
+                'wa_url' => whatsapp_booking_url($old, $service_name, $outlet_name, $outlet_whatsapp),
                 'name'   => $old['name'],
             ];
             header('Location: ' . url('booked'));
@@ -54,6 +56,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     }
 }
 
+$hours_by_outlet = get_opening_hours_by_outlet();
+$selected_outlet_id = $old['outlet_id'] !== '' ? (int) $old['outlet_id'] : 0;
+
 render('book', [
     'title'    => 'Book an Appointment — ' . get_setting('site_name_full'),
     'meta'     => 'Request an appointment at ' . get_setting('site_name') . '.',
@@ -62,7 +67,8 @@ render('book', [
     'js'       => ['pages/book'],
     'services' => $services,
     'outlets'  => $outlets,
-    'hours'    => get_opening_hours(),
+    'hours'    => $hours_by_outlet[$selected_outlet_id] ?? $hours_by_outlet[0] ?? [],
+    'hours_by_outlet' => $hours_by_outlet,
     'errors'   => $errors,
     'old'      => $old,
 ]);

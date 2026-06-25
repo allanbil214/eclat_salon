@@ -13,6 +13,18 @@ $outlets_json = json_encode(array_map(fn($o) => [
     'gmaps_url' => $o['gmaps_url'],
 ], $outlets), JSON_HEX_TAG | JSON_HEX_APOS);
 
+// Pre-format every branch's hours (including main, key "0") so the JS
+// doesn't need to duplicate fmt_time()'s logic.
+$hours_by_outlet = $hours_by_outlet ?? [];
+$hours_by_outlet_json = json_encode(array_map(
+    fn($rows) => array_map(fn($h) => [
+        'day_name'  => $h['day_name'],
+        'is_closed' => $h['is_closed'],
+        'time'      => $h['is_closed'] ? 'Closed' : fmt_time($h['open_time']) . ' – ' . fmt_time($h['close_time']),
+    ], $rows),
+    $hours_by_outlet
+), JSON_HEX_TAG | JSON_HEX_APOS);
+
 // Fallback (global settings) aside data
 $global_address  = get_setting('address');
 $global_map_url  = get_setting('map_url');
@@ -111,11 +123,11 @@ $global_email    = get_setting('email');
                     <div class="lbl">Phone</div>
                     <a class="val" data-aside-phone href="#"></a>
                 </div>
-                <div class="aside-block" data-aside-wa-block style="display:none">
+                <!-- <div class="aside-block" data-aside-wa-block style="display:none">
                     <a class="btn btn-primary" data-aside-wa href="#" target="_blank" rel="noopener" style="width:100%;text-align:center">
                         <i class="fa-brands fa-whatsapp"></i> WhatsApp this outlet
                     </a>
-                </div>
+                </div> -->
             </div>
 
             <!-- Fallback: global settings (shown when no outlet selected) -->
@@ -135,12 +147,14 @@ $global_email    = get_setting('email');
             <!-- Always shown -->
             <div class="aside-block">
                 <div class="lbl">Opening hours</div>
-                <?php foreach ($hours as $h): ?>
-                    <div class="hours-row<?= $h['is_closed'] ? ' closed' : '' ?>">
-                        <span class="d"><?= e($h['day_name']) ?></span>
-                        <span class="t"><?= $h['is_closed'] ? 'Closed' : e(fmt_time($h['open_time']) . ' – ' . fmt_time($h['close_time'])) ?></span>
-                    </div>
-                <?php endforeach; ?>
+                <div data-hours-list>
+                    <?php foreach ($hours as $h): ?>
+                        <div class="hours-row<?= $h['is_closed'] ? ' closed' : '' ?>">
+                            <span class="d"><?= e($h['day_name']) ?></span>
+                            <span class="t"><?= $h['is_closed'] ? 'Closed' : e(fmt_time($h['open_time']) . ' – ' . fmt_time($h['close_time'])) ?></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <div class="aside-block">
                 <div class="lbl">Before you book</div>
@@ -153,9 +167,11 @@ $global_email    = get_setting('email');
 <script>
 (function () {
   var outlets = <?= $outlets_json ?>;
+  var hoursByOutlet = <?= $hours_by_outlet_json ?>;
   var picker  = document.querySelector('[data-outlet-picker]');
   var asideOutlet   = document.querySelector('[data-aside-outlet]');
   var asideFallback = document.querySelector('[data-aside-fallback]');
+  var hoursList     = document.querySelector('[data-hours-list]');
   if (!picker || !asideOutlet) return;
 
   var elName    = document.querySelector('[data-aside-name]');
@@ -166,9 +182,26 @@ $global_email    = get_setting('email');
   var elWaBlock = document.querySelector('[data-aside-wa-block]');
   var elWa      = document.querySelector('[data-aside-wa]');
 
+  function renderHours(outletId) {
+    if (!hoursList) return;
+    var rows = hoursByOutlet[outletId] || hoursByOutlet[0] || [];
+    hoursList.innerHTML = rows.map(function (h) {
+      return '<div class="hours-row' + (h.is_closed ? ' closed' : '') + '">' +
+               '<span class="d"></span><span class="t"></span>' +
+             '</div>';
+    }).join('');
+    // Set text via textContent (not innerHTML) to keep this XSS-safe.
+    hoursList.querySelectorAll('.hours-row').forEach(function (row, i) {
+      row.querySelector('.d').textContent = rows[i].day_name;
+      row.querySelector('.t').textContent = rows[i].time;
+    });
+  }
+
   function update() {
     var id = parseInt(picker.value, 10);
     var o  = outlets.find(function(x){ return x.id === id; });
+
+    renderHours(o ? id : 0);
 
     if (!o) {
       asideOutlet.style.display   = 'none';

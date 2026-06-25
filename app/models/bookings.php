@@ -24,8 +24,9 @@ function create_booking_request(array $d): bool {
  * Build a wa.me link with the booking details pre-filled (Indonesian).
  * The number lives in settings → 'whatsapp' (digits only, e.g. 6281211988279).
  */
-function whatsapp_booking_url(array $d, string $service_name = '', string $outlet_name = ''): string {
-    $number = preg_replace('/\D+/', '', get_setting('whatsapp'));
+function whatsapp_booking_url(array $d, string $service_name = '', string $outlet_name = '', string $outlet_whatsapp = ''): string {
+    $raw    = $outlet_whatsapp !== '' ? $outlet_whatsapp : get_setting('whatsapp');
+    $number = preg_replace('/\D+/', '', $raw);
     if ($number === '') {
         return '';
     }
