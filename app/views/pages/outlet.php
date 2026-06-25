@@ -1,6 +1,12 @@
 <?php /** Single outlet page. Vars: $outlet */ ?>
 
-<section class="section solid-hero">
+<?php $hero_slide = !empty($hero_slides) ? $hero_slides[array_rand($hero_slides)] : null; ?>
+<section class="page-hero">
+    <?php if ($hero_slide): ?>
+        <div class="page-hero-bg">
+            <img src="<?= e(image($hero_slide['image_url'])) ?>" alt="">
+        </div>
+    <?php endif; ?>
     <div class="container">
         <div style="padding-top:clamp(40px,6vw,80px); padding-bottom: clamp(20px,3vw,40px)">
             <a class="btn-text" href="<?= e(url('outlets')) ?>" style="font-size:0.82rem;letter-spacing:.14em;text-transform:uppercase">← All locations</a>

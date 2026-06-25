@@ -10,9 +10,9 @@ if (!$outlet) {
 }
 
 render('outlet', [
-    'title'        => e($outlet['name']) . ' — ' . get_setting('site_name_full'),
-    'meta'         => e($outlet['address']),
-    'active'       => 'outlets',
-    'solid_header' => true,
-    'outlet'       => $outlet,
+    'title'       => e($outlet['name']) . ' — ' . get_setting('site_name_full'),
+    'meta'        => e($outlet['address']),
+    'active'      => 'outlets',
+    'outlet'      => $outlet,
+    'hero_slides' => get_hero_slides(),
 ]);

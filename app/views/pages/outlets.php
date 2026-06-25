@@ -1,8 +1,14 @@
 <?php /** Outlets listing page. Vars: $outlets */ ?>
 
-<section class="section solid-hero">
+<?php $hero_slide = !empty($hero_slides) ? $hero_slides[array_rand($hero_slides)] : null; ?>
+<section class="page-hero">
+    <?php if ($hero_slide): ?>
+        <div class="page-hero-bg">
+            <img src="<?= e(image($hero_slide['image_url'])) ?>" alt="">
+        </div>
+    <?php endif; ?>
     <div class="container">
-        <div class="section-head center" style="padding-top: clamp(40px,6vw,80px)">
+        <div class="section-head center">
             <span class="eyebrow eyebrow--center">Find us</span>
             <h1 style="margin-top:22px">Our Locations</h1>
             <p class="lede" style="max-width:46ch;margin-inline:auto">Every ÉCLAT outlet carries the same obsessive standard. Choose the one closest to you.</p>
