@@ -16,7 +16,7 @@ $component_css = [
     'components/layout', 'components/buttons', 'components/header',
     'components/hero', 'components/cards', 'components/interactions',
     'components/forms', 'components/cart', 'components/footer',
-    'components/outlets',
+    'components/outlets', 'components/map-embed',
 ];
 // Core scripts run on every page.
 $core_js = ['core/preloader', 'core/theme-toggle', 'core/nav', 'core/reveal', 'core/counters', 'core/accordion', 'core/cart'];

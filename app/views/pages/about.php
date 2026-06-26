@@ -37,6 +37,8 @@
     </div>
 </section>
 
+<?php partial('location-map'); ?>
+
 <section class="section section--alt">
     <div class="container">
         <div class="section-head center">

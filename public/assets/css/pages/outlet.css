@@ -65,69 +65,6 @@
 .hours-day { width: 110px; }
 .hours-closed { color: var(--text-3); font-size: 0.82rem; letter-spacing: 0.06em; }
 
-/* ── Map side-by-side layout ── */
-.outlet-map-layout {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    min-height: 380px;
-    border: 1px solid var(--line);
-}
-
-.outlet-map-embed {
-    line-height: 0;
-}
-
-.outlet-map-embed iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 340px;
-    display: block;
-    border: 0;
-}
-
-.outlet-map-card {
-    background: var(--bg-2);
-    padding: clamp(24px, 3vw, 40px);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-}
-
-.outlet-map-card-block {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.outlet-map-card-block p {
-    margin: 0;
-    color: var(--text);
-    font-size: 0.97rem;
-    line-height: 1.6;
-}
-
-.outlet-map-landmark {
-    color: var(--text-2) !important;
-    font-size: 0.86rem !important;
-}
-
-@media (max-width: 700px) {
-    .outlet-map-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .outlet-map-embed iframe {
-        min-height: 260px;
-    }
-
-    .outlet-map-card {
-        padding: 24px;
-    }
-}
-
 /* ── Responsive ── */
 @media (max-width: 700px) {
     .outlet-stats-bar { gap: 8px 14px; }

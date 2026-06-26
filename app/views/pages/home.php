@@ -72,6 +72,8 @@
     </div>
 </section>
 
+<?php partial('location-map'); ?>
+
 <!-- Services preview -->
 <section class="section section--alt">
     <div class="container">
