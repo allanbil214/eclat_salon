@@ -459,3 +459,10 @@ a.adm-chip.on:hover { background: color-mix(in srgb, var(--a-accent) 10%, transp
       display: none;
   }
 }
+/* ---------- outlet map picker ---------- */
+.adm-map-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.adm-map-canvas { height: 320px; border-radius: var(--a-radius-sm); border: 1px solid var(--a-line); overflow: hidden; margin-bottom: 12px; }
+.adm-map-coords { display: flex; gap: 16px; }
+.adm-map-feedback { font-size: 0.82rem; color: var(--a-text3); }
+.adm-map-feedback.ok  { color: var(--a-ok); }
+.adm-map-feedback.err { color: var(--a-err); }

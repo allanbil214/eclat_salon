@@ -17,6 +17,7 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
       href="https://www.svgrepo.com/download/530645/scissors.svg">
 
     <?php if (!empty($quill)): ?><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"><?php endif; ?>
+    <?php if (!empty($leaflet)): ?><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"><?php endif; ?>
     <?= css('admin') ?>
 </head>
 <body class="adm<?= $chrome ? '' : ' adm--bare' ?>">
@@ -49,5 +50,9 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
     <?= js('admin') ?>
     <?php if (!empty($quill)): ?><script defer src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script><?php endif; ?>
     <?= js('admin-forms') ?>
+    <?php if (!empty($leaflet)): ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <?= js('outlet-map') ?>
+    <?php endif; ?>
 </body>
 </html>

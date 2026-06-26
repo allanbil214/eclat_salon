@@ -21,13 +21,6 @@ function get_outlet_hours(int $outlet_id): array {
     );
 }
 
-function get_outlet_services(int $outlet_id): array {
-    return q(
-        'SELECT * FROM outlet_services WHERE outlet_id = :oid ORDER BY sort_order ASC, id ASC',
-        ['oid' => $outlet_id]
-    );
-}
-
 function get_outlet_services_grouped(int $outlet_id): array {
     $grouped = [];
     foreach (get_outlet_services($outlet_id) as $row) {
@@ -36,7 +29,7 @@ function get_outlet_services_grouped(int $outlet_id): array {
     return $grouped;
 }
 
-function get_outlet_faqs(int $outlet_id): array {
+function get_outlet_faqs_grouped(int $outlet_id): array {
     return q(
         'SELECT * FROM outlet_faq WHERE outlet_id = :id AND is_active = 1 ORDER BY sort_order ASC, id ASC',
         ['id' => $outlet_id]
@@ -67,4 +60,24 @@ function get_all_outlets(): array {
 
 function get_outlet_by_id(int $id): ?array {
     return q1('SELECT * FROM outlets WHERE id = :id', ['id' => $id]);
+}
+
+/* ---------- outlet services ---------- */
+
+function get_outlet_services(int $outlet_id): array {
+    return q('SELECT * FROM outlet_services WHERE outlet_id = :oid ORDER BY sort_order ASC, id ASC', ['oid' => $outlet_id]);
+}
+
+function get_outlet_service(int $id): ?array {
+    return q1('SELECT * FROM outlet_services WHERE id = :id', ['id' => $id]);
+}
+
+/* ---------- outlet FAQs ---------- */
+
+function get_outlet_faqs(int $outlet_id): array {
+    return q('SELECT * FROM outlet_faq WHERE outlet_id = :oid ORDER BY sort_order ASC, id ASC', ['oid' => $outlet_id]);
+}
+
+function get_outlet_faq(int $id): ?array {
+    return q1('SELECT * FROM outlet_faq WHERE id = :id', ['id' => $id]);
 }

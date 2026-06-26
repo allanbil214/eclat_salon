@@ -1,5 +1,5 @@
 <?php
-$x = $o ?? ['id'=>0,'name'=>'','slug'=>'','city'=>'','tagline'=>'','description'=>'','landmark'=>'','hero_label'=>'','google_rating'=>'','has_ladies_room'=>0,'address'=>'','phone'=>'','whatsapp'=>'','gmaps_url'=>'','photo_url'=>'','is_active'=>1,'sort_order'=>0];
+$x = $o ?? ['id'=>0,'name'=>'','slug'=>'','city'=>'','tagline'=>'','description'=>'','landmark'=>'','hero_label'=>'','google_rating'=>'','has_ladies_room'=>0,'address'=>'','phone'=>'','whatsapp'=>'','gmaps_url'=>'','lat'=>'','lng'=>'','photo_url'=>'','is_active'=>1,'sort_order'=>0];
 ?>
 <div class="adm-head">
     <h1 class="adm-h1"><?= $x['id'] ? 'Edit outlet' : 'New outlet' ?></h1>
@@ -21,7 +21,38 @@ $x = $o ?? ['id'=>0,'name'=>'','slug'=>'','city'=>'','tagline'=>'','description'
     <label class="adm-field"><span>Full address</span><textarea name="address" rows="3"><?= e($x['address']) ?></textarea></label>
     <label class="adm-field"><span>Phone</span><input type="text" name="phone" value="<?= e($x['phone']) ?>" placeholder="+62 21 1234 5678"></label>
     <label class="adm-field"><span>WhatsApp number <small>· digits only, with country code · e.g. 6221123456780</small></span><input type="text" name="whatsapp" value="<?= e($x['whatsapp']) ?>" placeholder="6221..."></label>
-    <label class="adm-field"><span>Google Maps URL</span><input type="url" name="gmaps_url" value="<?= e($x['gmaps_url']) ?>" placeholder="https://maps.google.com/…"></label>
+
+    <label class="adm-field">
+        <span>Google Maps URL</span>
+        <input type="url" name="gmaps_url" value="<?= e($x['gmaps_url']) ?>" placeholder="https://maps.google.com/…" data-gmaps-input>
+    </label>
+
+    <!-- Map picker -->
+    <div class="adm-field" data-outlet-map>
+        <span>Location pin <small>· paste your Maps URL above then click "Extract", or click the map to place a pin</small></span>
+
+        <div class="adm-map-toolbar">
+            <button type="button" class="adm-btn" data-extract-btn>⌖ Extract from Maps URL</button>
+            <span class="adm-map-feedback" data-map-feedback></span>
+        </div>
+
+        <div class="adm-map-canvas" data-map-canvas></div>
+
+        <div class="adm-map-coords">
+            <label class="adm-field adm-field--sm">
+                <span>Latitude</span>
+                <input type="number" name="lat" step="0.0000001" placeholder="e.g. -6.2088"
+                    value="<?= ($x['lat'] !== null && $x['lat'] !== '') ? e($x['lat']) : '' ?>"
+                    data-lat-input>
+            </label>
+            <label class="adm-field adm-field--sm">
+                <span>Longitude</span>
+                <input type="number" name="lng" step="0.0000001" placeholder="e.g. 106.8456"
+                    value="<?= ($x['lng'] !== null && $x['lng'] !== '') ? e($x['lng']) : '' ?>"
+                    data-lng-input>
+            </label>
+        </div>
+    </div>
 
     <div class="adm-field">
         <span>Photo</span>
