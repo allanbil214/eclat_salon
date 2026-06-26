@@ -14,6 +14,37 @@ function get_outlet_by_slug(string $slug): ?array {
     return q1('SELECT * FROM outlets WHERE slug = :slug AND is_active = 1', ['slug' => $slug]);
 }
 
+function get_outlet_hours(int $outlet_id): array {
+    return q(
+        'SELECT * FROM opening_hours WHERE outlet_id = :id ORDER BY day_order ASC',
+        ['id' => $outlet_id]
+    );
+}
+
+function get_outlet_services_grouped(int $outlet_id): array {
+    $grouped = [];
+    foreach (get_outlet_services($outlet_id) as $row) {
+        $grouped[$row['category_name']][] = $row;
+    }
+    return $grouped;
+}
+
+function get_other_outlets(int $exclude_id): array {
+    return q(
+        'SELECT * FROM outlets WHERE is_active = 1 AND id != :id ORDER BY sort_order ASC, id ASC',
+        ['id' => $exclude_id]
+    );
+}
+
+/** Returns today\'s opening_hours row for an outlet, or null. */
+function get_outlet_today(int $outlet_id): ?array {
+    $day_order = (int) date('N'); // 1=Mon … 7=Sun
+    return q1(
+        'SELECT * FROM opening_hours WHERE outlet_id = :id AND day_order = :d',
+        ['id' => $outlet_id, 'd' => $day_order]
+    );
+}
+
 /* ---------- admin helpers ---------- */
 
 function get_all_outlets(): array {

@@ -10,9 +10,14 @@ if (!$outlet) {
 }
 
 render('outlet', [
-    'title'       => e($outlet['name']) . ' — ' . get_setting('site_name_full'),
-    'meta'        => e($outlet['address']),
-    'active'      => 'outlets',
-    'outlet'      => $outlet,
-    'hero_slides' => get_hero_slides(),
+    'title'          => e($outlet['name']) . ' — ' . get_setting('site_name_full'),
+    'meta'           => e($outlet['address']),
+    'active'         => 'outlets',
+    'css'            => ['outlet'],
+    'outlet'         => $outlet,
+    'hero_slides'    => get_hero_slides(),
+    'hours'          => get_outlet_hours((int) $outlet['id']),
+    'today'          => get_outlet_today((int) $outlet['id']),
+    'services'       => get_outlet_services_grouped((int) $outlet['id']),
+    'other_outlets'  => get_other_outlets((int) $outlet['id']),
 ]);

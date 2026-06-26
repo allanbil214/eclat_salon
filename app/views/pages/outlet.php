@@ -1,4 +1,4 @@
-<?php /** Single outlet page. Vars: $outlet */ ?>
+<?php /** Single outlet detail page. Vars: $outlet, $hours, $today, $services, $other_outlets */ ?>
 
 <?php $hero_slide = !empty($hero_slides) ? $hero_slides[array_rand($hero_slides)] : null; ?>
 <section class="page-hero">
@@ -8,27 +8,77 @@
         </div>
     <?php endif; ?>
     <div class="container">
-        <div style="padding-top:clamp(40px,6vw,80px); padding-bottom: clamp(20px,3vw,40px)">
-            <a class="btn-text" href="<?= e(url('outlets')) ?>" style="font-size:0.82rem;letter-spacing:.14em;text-transform:uppercase">← All locations</a>
-            <h1 style="margin-top:22px"><?= e($outlet['name']) ?></h1>
-            <p class="lede"><?= e($outlet['city']) ?></p>
+        <a class="breadcrumb" href="<?= e(url('outlets')) ?>">← All locations</a>
+        <?php if (!empty($outlet['tagline'])): ?>
+            <p class="eyebrow" style="margin-top:32px"><?= e($outlet['tagline']) ?></p>
+        <?php endif; ?>
+        <h1 style="margin-top:<?= !empty($outlet['tagline']) ? '16px' : '40px' ?>"><?= e($outlet['name']) ?></h1>
+        <p class="lede"><?= e($outlet['city']) ?></p>
+
+        <?php
+            $has_rating  = !empty($outlet['google_rating']);
+            $has_today   = $today && !$today['is_closed'];
+            $has_ladies  = !empty($outlet['has_ladies_room']);
+            if ($has_rating || $has_today || $has_ladies):
+        ?>
+        <div class="outlet-stats-bar">
+            <?php if ($has_rating): ?>
+                <span class="outlet-stat">
+                    <span class="outlet-stat-icon">★</span>
+                    <?= e((string) $outlet['google_rating']) ?> Google
+                </span>
+            <?php endif; ?>
+            <?php if ($has_today): ?>
+                <span class="outlet-stat">
+                    <i class="fa-regular fa-clock"></i>
+                    Open today · <?= fmt_time($today['open_time']) ?>–<?= fmt_time($today['close_time']) ?>
+                </span>
+            <?php elseif ($today && $today['is_closed']): ?>
+                <span class="outlet-stat outlet-stat--closed">
+                    <i class="fa-regular fa-clock"></i> Closed today
+                </span>
+            <?php endif; ?>
+            <?php if ($has_ladies): ?>
+                <span class="outlet-stat">
+                    <i class="fa-solid fa-venus"></i> Ladies room
+                </span>
+            <?php endif; ?>
         </div>
+        <?php endif; ?>
     </div>
 </section>
 
+<?php /* ── 1. Info + photo ── */ ?>
 <section class="section">
     <div class="container">
         <div class="outlet-detail">
 
-            <div class="outlet-detail-media reveal">
-                <?php if (!empty($outlet['photo_url'])): ?>
-                    <img src="<?= e(image($outlet['photo_url'])) ?>" alt="<?= e($outlet['name']) ?>">
-                <?php else: ?>
-                    <div class="outlet-card-placeholder outlet-card-placeholder--lg"><i class="fa-solid fa-scissors"></i></div>
+            <div class="outlet-detail-left">
+                <div class="outlet-detail-media reveal">
+                    <?php if (!empty($outlet['photo_url'])): ?>
+                        <img src="<?= e(image($outlet['photo_url'])) ?>" alt="<?= e($outlet['name']) ?>">
+                    <?php else: ?>
+                        <div class="outlet-card-placeholder outlet-card-placeholder--lg"><i class="fa-solid fa-scissors"></i></div>
+                    <?php endif; ?>
+                </div>
+
+                <?php if (!empty($outlet['description'])): ?>
+                <div class="outlet-desc-below reveal">
+                    <span class="eyebrow">About this outlet</span>
+                    <p><?= nl2br(e($outlet['description'])) ?></p>
+                </div>
                 <?php endif; ?>
             </div>
 
             <div class="outlet-detail-info reveal" style="--d:.1s">
+
+                <?php if (!empty($outlet['landmark'])): ?>
+                <div class="outlet-info-block">
+                    <span class="eyebrow">Landmark</span>
+                    <p><?= e($outlet['landmark']) ?></p>
+                </div>
+                <?php endif; ?>
+
                 <div class="outlet-info-block">
                     <span class="eyebrow">Address</span>
                     <p><?= e($outlet['address']) ?></p>
@@ -37,10 +87,41 @@
                     <?php endif; ?>
                 </div>
 
+                <?php if (!empty($hours)): ?>
+                <div class="outlet-info-block">
+                    <span class="eyebrow">Opening Hours</span>
+                    <table class="hours-table">
+                        <?php
+                        $today_order = (int) date('N');
+                        foreach ($hours as $row):
+                            $is_today = ((int) $row['day_order']) === $today_order;
+                        ?>
+                        <tr class="<?= $is_today ? 'is-today' : '' ?>">
+                            <td class="hours-day"><?= e($row['day_name']) ?></td>
+                            <td class="hours-time">
+                                <?php if ($row['is_closed']): ?>
+                                    <span class="hours-closed">Closed</span>
+                                <?php else: ?>
+                                    <?= fmt_time($row['open_time']) ?>–<?= fmt_time($row['close_time']) ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+
                 <?php if (!empty($outlet['phone'])): ?>
                 <div class="outlet-info-block">
                     <span class="eyebrow">Phone</span>
                     <p><a href="tel:<?= e(preg_replace('/\s/', '', $outlet['phone'])) ?>"><?= e($outlet['phone']) ?></a></p>
+                </div>
+                <?php endif; ?>
+
+                <?php if (!empty($outlet['has_ladies_room'])): ?>
+                <div class="outlet-info-block">
+                    <span class="eyebrow">Facilities</span>
+                    <p><i class="fa-solid fa-venus" style="color:var(--accent);margin-right:6px"></i>Private ladies room available</p>
                 </div>
                 <?php endif; ?>
 
@@ -52,10 +133,105 @@
                     <?php endif; ?>
                     <a class="btn" href="<?= e(url('book')) ?>">Book appointment</a>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 </section>
+
+<?php /* ── 2. Google Map ── */ ?>
+<?php if (!empty($outlet['gmaps_url'])): ?>
+<?php
+    preg_match('/@(-?\d+\.\d+),(-?\d+\.\d+)/', $outlet['gmaps_url'], $coords);
+    $embed_url = !empty($coords)
+        ? 'https://maps.google.com/maps?q=' . $coords[1] . ',' . $coords[2] . '&z=16&output=embed'
+        : null;
+?>
+<?php if ($embed_url): ?>
+<section class="section--tight section--alt">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Location</span>
+            <h2>Find us</h2>
+            <?php if (!empty($outlet['landmark'])): ?>
+                <p class="lede">Near <?= e($outlet['landmark']) ?></p>
+            <?php endif; ?>
+        </div>
+        <div class="outlet-map-wrap reveal">
+            <iframe
+                src="<?= e($embed_url) ?>"
+                width="100%" height="420" style="border:0;border-radius:var(--radius-lg)"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <p style="margin-top:18px;color:var(--text-2);font-size:0.9rem"><?= e($outlet['address']) ?> &nbsp;·&nbsp; <a href="<?= e($outlet['gmaps_url']) ?>" target="_blank" rel="noopener" style="color:var(--accent)">Get directions →</a></p>
+    </div>
+</section>
+<?php endif; ?>
+<?php endif; ?>
+
+<?php /* ── 3. Services & prices ── */ ?>
+<?php if (!empty($services)): ?>
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Menu &amp; pricing</span>
+            <h2>Services at <?= e($outlet['city']) ?></h2>
+        </div>
+        <?php foreach ($services as $category => $items): ?>
+            <div class="menu-cat">
+                <div class="menu-cat__head">
+                    <h3><?= e($category) ?></h3>
+                </div>
+                <?php foreach ($items as $item): ?>
+                <div class="menu-row">
+                    <div class="nm"><?= e($item['name']) ?></div>
+                    <div class="price"><?= price_label($item) ?></div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php /* ── 4. Other outlets ── */ ?>
+<?php if (!empty($other_outlets)): ?>
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Our network</span>
+            <h2>Other ÉCLAT locations</h2>
+        </div>
+        <div class="outlets-grid">
+            <?php foreach ($other_outlets as $o): ?>
+            <div class="outlet-card outlet-card--full reveal">
+                <a class="outlet-card-img" href="<?= e(url('outlet/' . $o['slug'])) ?>">
+                    <?php if (!empty($o['photo_url'])): ?>
+                        <img src="<?= e(image($o['photo_url'])) ?>" alt="<?= e($o['name']) ?>" loading="lazy">
+                    <?php else: ?>
+                        <div class="outlet-card-placeholder"><i class="fa-solid fa-scissors"></i></div>
+                    <?php endif; ?>
+                </a>
+                <div class="outlet-card-body">
+                    <p class="outlet-card-city"><?= e($o['city']) ?></p>
+                    <h3 class="outlet-card-name"><?= e($o['name']) ?></h3>
+                    <p class="outlet-card-addr"><?= e($o['address']) ?></p>
+                    <div class="outlet-card-actions">
+                        <?php if (!empty($o['gmaps_url'])): ?>
+                            <a class="outlet-action outlet-action--map" href="<?= e($o['gmaps_url']) ?>" target="_blank" rel="noopener" title="Google Maps"><i class="fa-solid fa-location-dot"></i></a>
+                        <?php endif; ?>
+                        <?php if (!empty($o['whatsapp'])): ?>
+                            <a class="outlet-action outlet-action--wa" href="https://wa.me/<?= e(preg_replace('/\D/', '', $o['whatsapp'])) ?>" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                        <?php endif; ?>
+                        <a class="outlet-card-link" href="<?= e(url('outlet/' . $o['slug'])) ?>">Outlet page →</a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
 
 <?php partial('cta'); ?>
