@@ -64,7 +64,7 @@ render('book', [
     'meta'     => 'Request an appointment at ' . get_setting('site_name') . '.',
     'active'   => '',
     'css'      => ['book'],
-    'js'       => ['pages/book'],
+    'js'       => ['pages/book', 'pages/book-outlet'],
     'services' => $services,
     'outlets'  => $outlets,
     'hours'    => $hours_by_outlet[$selected_outlet_id] ?? $hours_by_outlet[0] ?? [],

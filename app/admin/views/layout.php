@@ -55,5 +55,6 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <?= js('outlet-map') ?>
     <?php endif; ?>
+    <?php foreach ($js ?? [] as $script) echo js($script) . "\n    "; ?>
 </body>
 </html>

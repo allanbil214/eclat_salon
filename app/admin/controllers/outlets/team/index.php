@@ -10,4 +10,5 @@ render_admin('outlets/team_index', [
     'active' => 'outlets',
     'outlet' => $outlet,
     'team'   => $all_team,
+    'js'     => ['admin-check-all'],
 ]);

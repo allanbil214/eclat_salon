@@ -101,13 +101,4 @@ if ($global):
         </div>
     </div>
 </div>
-<script>
-(function(){
-    var modal  = document.getElementById('js-import-modal');
-    var open   = [document.getElementById('js-import-btn'), document.getElementById('js-import-btn2')];
-    var closes = [document.getElementById('js-import-close'), document.getElementById('js-import-cancel'), document.getElementById('js-import-scrim')];
-    open.forEach(function(b){ if(b) b.addEventListener('click', function(){ modal.hidden = false; }); });
-    closes.forEach(function(b){ if(b) b.addEventListener('click', function(){ modal.hidden = true; }); });
-})();
-</script>
 <?php endif; ?>

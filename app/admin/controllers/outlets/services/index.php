@@ -9,4 +9,5 @@ render_admin('outlets/services_index', [
     'active' => 'outlets',
     'outlet' => $outlet,
     'rows'   => $services,
+    'js'     => ['admin-import-modal'],
 ]);
