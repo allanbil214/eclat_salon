@@ -49,7 +49,7 @@
 </section>
 
 <?php /* ── 1. Info + photo ── */ ?>
-<section class="section">
+<section class="section outlet-page-section">
     <div class="container">
         <div class="outlet-detail">
 
@@ -140,39 +140,66 @@
 </section>
 
 <?php /* ── 2. Google Map ── */ ?>
-<?php if (!empty($outlet['gmaps_url'])): ?>
 <?php
-    preg_match('/@(-?\d+\.\d+),(-?\d+\.\d+)/', $outlet['gmaps_url'], $coords);
-    $embed_url = !empty($coords)
-        ? 'https://maps.google.com/maps?q=' . $coords[1] . ',' . $coords[2] . '&z=16&output=embed'
-        : null;
+    $embed_url = null;
+    if (!empty($outlet['lat']) && !empty($outlet['lng'])) {
+        $embed_url = 'https://maps.google.com/maps?q=' . $outlet['lat'] . ',' . $outlet['lng'] . '&z=16&output=embed';
+    } elseif (!empty($outlet['gmaps_url'])) {
+        preg_match('/@(-?\d+\.\d+),(-?\d+\.\d+)/', $outlet['gmaps_url'], $coords);
+        if (!empty($coords)) {
+            $embed_url = 'https://maps.google.com/maps?q=' . $coords[1] . ',' . $coords[2] . '&z=16&output=embed';
+        }
+    }
 ?>
 <?php if ($embed_url): ?>
-<section class="section--tight section--alt">
+<section class="section--tight section--alt outlet-page-section">
     <div class="container">
         <div class="section-head">
             <span class="eyebrow">Location</span>
             <h2>Find us</h2>
-            <?php if (!empty($outlet['landmark'])): ?>
-                <p class="lede">Near <?= e($outlet['landmark']) ?></p>
-            <?php endif; ?>
         </div>
-        <div class="outlet-map-wrap reveal">
-            <iframe
-                src="<?= e($embed_url) ?>"
-                width="100%" height="420" style="border:0;border-radius:var(--radius-lg)"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+        <div class="outlet-map-layout reveal">
+            <div class="outlet-map-embed">
+                <iframe
+                    src="<?= e($embed_url) ?>"
+                    width="100%" height="100%" style="border:0"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="outlet-map-card">
+                <?php if (!empty($outlet['address'])): ?>
+                <div class="outlet-map-card-block">
+                    <span class="eyebrow">Full address</span>
+                    <p><?= e($outlet['address']) ?></p>
+                </div>
+                <?php endif; ?>
+                <?php if (!empty($outlet['landmark'])): ?>
+                <div class="outlet-map-card-block">
+                    <p class="outlet-map-landmark">Near <?= e($outlet['landmark']) ?></p>
+                </div>
+                <?php endif; ?>
+                <?php
+                    $nav_url = null;
+                    if (!empty($outlet['lat']) && !empty($outlet['lng'])) {
+                        $nav_url = 'https://www.google.com/maps/dir/?api=1&destination=' . $outlet['lat'] . ',' . $outlet['lng'];
+                    } elseif (!empty($outlet['gmaps_url'])) {
+                        $nav_url = $outlet['gmaps_url'];
+                    }
+                ?>
+                <?php if ($nav_url): ?>
+                <a class="btn" href="<?= e($nav_url) ?>" target="_blank" rel="noopener">
+                    Get directions →
+                </a>
+                <?php endif; ?>
+            </div>
         </div>
-        <p style="margin-top:18px;color:var(--text-2);font-size:0.9rem"><?= e($outlet['address']) ?> &nbsp;·&nbsp; <a href="<?= e($outlet['gmaps_url']) ?>" target="_blank" rel="noopener" style="color:var(--accent)">Get directions →</a></p>
     </div>
 </section>
-<?php endif; ?>
 <?php endif; ?>
 
 <?php /* ── 3. Services & prices ── */ ?>
 <?php if (!empty($services)): ?>
-<section class="section section--alt">
+<section class="section section--alt outlet-page-section">
     <div class="container">
         <div class="section-head">
             <span class="eyebrow">Menu &amp; pricing</span>
@@ -195,9 +222,29 @@
 </section>
 <?php endif; ?>
 
-<?php /* ── 4. Other outlets ── */ ?>
+<?php /* ── 4. FAQs ── */ ?>
+<?php if (!empty($faqs)): ?>
+<section class="section outlet-page-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">Before you visit</span>
+            <h2>Frequently asked questions</h2>
+        </div>
+        <div class="outlet-faq-list">
+            <?php foreach ($faqs as $faq): ?>
+            <details class="outlet-faq-item reveal">
+                <summary class="outlet-faq-q"><?= e($faq['question']) ?></summary>
+                <div class="outlet-faq-a"><p><?= nl2br(e($faq['answer'])) ?></p></div>
+            </details>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php /* ── 5. Other outlets ── */ ?>
 <?php if (!empty($other_outlets)): ?>
-<section class="section">
+<section class="section outlet-page-section">
     <div class="container">
         <div class="section-head">
             <span class="eyebrow">Our network</span>
