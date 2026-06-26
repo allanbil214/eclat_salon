@@ -10,7 +10,7 @@ function svc_price($s) {
     <h1 class="adm-h1">Services</h1>
     <div class="adm-head-actions">
         <a class="adm-btn" href="<?= e(admin_url('services/categories')) ?>">Categories</a>
-        <a class="adm-btn adm-btn--primary" href="<?= e(admin_url('services/new')) ?>">+ New service</a>
+        <a class="adm-btn adm-btn--primary" href="<?= e(admin_url('services/new')) ?>"><i class="fa-solid fa-plus"></i> New service</a>
     </div>
 </div>
 <div class="adm-tabs"><a class="adm-tab on" href="<?= e(admin_url('services')) ?>">Services <span><?= count($rows) ?></span></a><a class="adm-tab" href="<?= e(admin_url('services/categories')) ?>">Categories <span><?= count($cats) ?></span></a></div>
@@ -26,8 +26,8 @@ function svc_price($s) {
             <td class="adm-muted"><?= $s['duration_min'] ? (int) $s['duration_min'] . ' min' : '—' ?></td>
             <td><?= $s['is_active'] ? '<span class="adm-badge on">Active</span>' : '<span class="adm-badge off">Hidden</span>' ?></td>
             <td class="adm-row-actions">
-                <a href="<?= e(admin_url('services/edit?id=' . $s['id'])) ?>">Edit</a>
-                <form method="post" action="<?= e(admin_url('services/delete')) ?>" onsubmit="return confirm('Delete this service?');"><?= csrf_field() ?><input type="hidden" name="id" value="<?= (int) $s['id'] ?>"><button type="submit" class="adm-link-danger">Delete</button></form>
+                <a class="adm-btn adm-btn--sm" href="<?= e(admin_url('services/edit?id=' . $s['id'])) ?>"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <form method="post" action="<?= e(admin_url('services/delete')) ?>" onsubmit="return confirm('Delete this service?');"><?= csrf_field() ?><input type="hidden" name="id" value="<?= (int) $s['id'] ?>"><button type="submit" class="adm-link-danger"><i class="fa-solid fa-trash"></i></button></form>
             </td>
         </tr>
     <?php endforeach; ?>

@@ -4,7 +4,7 @@
         <h1 class="adm-h1">Opening Hours — <?= e($outlet['name']) ?></h1>
         <p class="adm-muted" style="margin:4px 0 0">Hours specific to this outlet. The main branch hours are managed under <a href="<?= e(admin_url('hours')) ?>" style="color:var(--a-accent)">Opening Hours</a>.</p>
     </div>
-    <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>">← Outlets</a>
+    <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>"><i class="fa-solid fa-arrow-left"></i> Outlets</a>
 </div>
 
 <form method="post" action="<?= e(admin_url('outlets/hours/save')) ?>" class="adm-form adm-form--wide">

@@ -12,7 +12,7 @@
             <td class="adm-muted"><?= e($b['service_name'] ?? '') ?: '—' ?></td>
             <td class="adm-muted"><?= $b['preferred_date'] ? e(date('j M Y', strtotime((string) $b['preferred_date']))) : '—' ?></td>
             <td class="adm-muted"><?= e(date('j M Y', strtotime((string) $b['created_at']))) ?></td>
-            <td class="adm-row-actions"><a href="<?= e(admin_url('bookings/view?id=' . $b['id'])) ?>">View</a></td>
+            <td class="adm-row-actions"><a class="adm-btn adm-btn--sm" href="<?= e(admin_url('bookings/view?id=' . $b['id'])) ?>"><i class="fa-solid fa-eye"></i> View</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

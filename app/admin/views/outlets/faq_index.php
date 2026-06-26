@@ -5,8 +5,8 @@
         <p class="adm-muted" style="margin:4px 0 0">Location-specific questions shown on the outlet detail page.</p>
     </div>
     <div style="display:flex;gap:10px;align-items:center">
-        <a class="adm-btn adm-btn--primary" href="<?= e(admin_url('outlets/faq/new?outlet_id=' . (int) $outlet['id'])) ?>">+ Add FAQ</a>
-        <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>">← Outlets</a>
+        <a class="adm-btn adm-btn--primary" href="<?= e(admin_url('outlets/faq/new?outlet_id=' . (int) $outlet['id'])) ?>"><i class="fa-solid fa-plus"></i> Add FAQ</a>
+        <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>"><i class="fa-solid fa-arrow-left"></i> Outlets</a>
     </div>
 </div>
 
@@ -29,12 +29,12 @@
             <td class="adm-muted"><?= (int) $r['sort_order'] ?></td>
             <td class="adm-muted"><?= $r['is_active'] ? '✓' : '—' ?></td>
             <td class="adm-row-actions">
-                <a href="<?= e(admin_url('outlets/faq/edit?outlet_id=' . (int) $outlet['id'] . '&id=' . (int) $r['id'])) ?>">Edit</a>
+                <a class="adm-btn adm-btn--sm" href="<?= e(admin_url('outlets/faq/edit?outlet_id=' . (int) $outlet['id'] . '&id=' . (int) $r['id'])) ?>"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                 <form method="post" action="<?= e(admin_url('outlets/faq/delete')) ?>" onsubmit="return confirm('Delete this FAQ?');">
                     <?= csrf_field() ?>
                     <input type="hidden" name="outlet_id" value="<?= (int) $outlet['id'] ?>">
                     <input type="hidden" name="id" value="<?= (int) $r['id'] ?>">
-                    <button type="submit" class="adm-link-danger">Delete</button>
+                    <button type="submit" class="adm-link-danger"><i class="fa-solid fa-trash"></i></button>
                 </form>
             </td>
         </tr>

@@ -20,3 +20,22 @@
     document.cookie = 'adm_theme=' + next + ';path=/;max-age=31536000;samesite=lax';
   });
 })();
+
+/* Dropdown menus (.adm-dropdown). */
+(function () {
+  function closeAll() {
+    document.querySelectorAll('.adm-dropdown-menu').forEach(function (m) { m.hidden = true; });
+  }
+  document.addEventListener('click', function (e) {
+    var toggle = e.target.closest('.adm-dropdown-toggle');
+    if (toggle) {
+      e.stopPropagation();
+      var menu = toggle.closest('.adm-dropdown').querySelector('.adm-dropdown-menu');
+      var wasHidden = menu.hidden;
+      closeAll();
+      menu.hidden = !wasHidden;
+    } else {
+      closeAll();
+    }
+  });
+})();

@@ -23,7 +23,7 @@ foreach (order_statuses() as $s) $tabs[$s] = ucfirst($s);
             <td><?= e(money((float) $o['total'])) ?></td>
             <td><span class="adm-badge st-<?= e($o['status']) ?>"><?= e($o['status']) ?></span></td>
             <td class="adm-muted"><?= e(date('j M Y', strtotime((string) $o['created_at']))) ?></td>
-            <td class="adm-row-actions"><a href="<?= e(admin_url('orders/view?id=' . $o['id'])) ?>">View</a></td>
+            <td class="adm-row-actions"><a class="adm-btn adm-btn--sm" href="<?= e(admin_url('orders/view?id=' . $o['id'])) ?>"><i class="fa-solid fa-eye"></i> View</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

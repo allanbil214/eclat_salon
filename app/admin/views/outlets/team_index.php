@@ -16,7 +16,7 @@ foreach ($team as $m) {
         <h1 class="adm-h1">Team — <?= e($outlet['name']) ?></h1>
         <p class="adm-muted" style="margin:4px 0 0">Check the members who work at this outlet. Members assigned to other outlets are shown but can be reassigned.</p>
     </div>
-    <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>">← Outlets</a>
+    <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>"><i class="fa-solid fa-arrow-left"></i> Outlets</a>
 </div>
 
 <?php if (!$team): ?>
@@ -67,7 +67,7 @@ foreach ($team as $m) {
             <td class="adm-muted"><?= e($m['role']) ?></td>
             <td class="adm-muted">
                 <?php if ($checked): ?>
-                    <span style="color:var(--a-ok)">✓ This outlet</span>
+                    <span style="color:var(--a-ok)"><i class="fa-solid fa-circle-check"></i> This outlet</span>
                 <?php elseif ($other_outlet): ?>
                     <?= e($other_outlet) ?>
                 <?php else: ?>

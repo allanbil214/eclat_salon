@@ -99,6 +99,14 @@ a.adm-chip.on:hover { background: color-mix(in srgb, var(--a-accent) 10%, transp
 .adm-btn--primary { background: var(--a-accent); border-color: var(--a-accent); color: var(--a-accent-ink); font-weight: 600; }
 .adm-btn--primary:hover { filter: brightness(1.06); color: var(--a-accent-ink); }
 .adm-btn--block { width: 100%; justify-content: center; }
+.adm-btn--sm { padding: 5px 11px; font-size: 0.8rem; border-radius: 8px; }
+.adm-btn--icon { padding: 5px 9px; border-radius: 8px; }
+.adm-btn--danger-sm { padding: 5px 11px; font-size: 0.8rem; border-radius: 8px; border-color: var(--a-err); color: var(--a-err); }
+.adm-btn--danger-sm:hover { background: color-mix(in srgb, var(--a-err) 10%, transparent); border-color: var(--a-err); color: var(--a-err); }
+.adm-dropdown-menu { position: absolute; right: 0; top: calc(100% + 4px); min-width: 160px; background: var(--a-bg2); border: 1px solid var(--a-line2); border-radius: 10px; padding: 4px; z-index: 100; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+.adm-dropdown-menu a { display: flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 7px; font-size: 0.85rem; color: var(--a-text); white-space: nowrap; }
+.adm-dropdown-menu a:hover { background: var(--a-bg3); color: var(--a-accent); }
+.adm-dropdown-menu i { width: 14px; text-align: center; font-size: 12px; opacity: .7; }
 
 .adm-table { width: 100%; border-collapse: collapse; background: var(--a-bg2); border: 1px solid var(--a-line); border-radius: var(--a-radius); overflow: hidden; box-shadow: var(--a-shadow); }
 .adm-table th, .adm-table td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--a-line); vertical-align: top; }
@@ -113,11 +121,11 @@ a.adm-chip.on:hover { background: color-mix(in srgb, var(--a-accent) 10%, transp
 .adm-badge.st-new { background: color-mix(in srgb, var(--a-accent) 18%, transparent); color: var(--a-accent); }
 .adm-badge.st-contacted { background: color-mix(in srgb, var(--a-text3) 22%, transparent); color: var(--a-text2); }
 .adm-badge.st-completed { background: color-mix(in srgb, var(--a-ok) 16%, transparent); color: var(--a-ok); }
-.adm-row-actions { white-space: nowrap; display: flex; gap: 14px; align-items: center; }
+.adm-row-actions { white-space: nowrap; display: flex; gap: 6px; align-items: center; }
 .adm-row-actions a:hover { color: var(--a-accent); }
-.adm-link-danger { background: none; border: 0; color: var(--a-err); font: inherit; font-size: 0.88rem; cursor: pointer; padding: 0; }
-.adm-link-danger:hover { text-decoration: underline; }
-.adm-row-actions form { display: inline; }
+.adm-link-danger { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 8px; border: 1px solid var(--a-err); background: none; color: var(--a-err); font: inherit; font-size: 0.8rem; cursor: pointer; }
+.adm-link-danger:hover { background: color-mix(in srgb, var(--a-err) 10%, transparent); text-decoration: none; }
+.adm-row-actions form { display: inline-flex; }
 .adm-empty { color: var(--a-text2); padding: 30px 0; }
 .adm-empty a, .adm-note a { color: var(--a-accent); }
 

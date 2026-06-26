@@ -31,9 +31,9 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
                 <button class="adm-theme-toggle" type="button" data-adm-theme-toggle aria-label="Toggle light / dark">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
                 </button>
-                <a class="adm-viewsite" href="<?= e(url('')) ?>" target="_blank" rel="noopener">View site ↗</a>
+                <a class="adm-viewsite" href="<?= e(url('')) ?>" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> View site</a>
                 <span class="adm-user"><?= e(current_admin()['name'] ?? 'Admin') ?></span>
-                <form method="post" action="<?= e(admin_url('logout')) ?>" class="adm-logout"><?= csrf_field() ?><button type="submit">Log out</button></form>
+                <form method="post" action="<?= e(admin_url('logout')) ?>" class="adm-logout"><?= csrf_field() ?><button type="submit"><i class="fa-solid fa-right-from-bracket"></i> Log out</button></form>
             </div>
         </header>
         <main class="adm-content">

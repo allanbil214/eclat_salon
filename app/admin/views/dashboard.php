@@ -48,16 +48,16 @@ $statusMeta = ['new' => 'New', 'contacted' => 'Contacted', 'completed' => 'Compl
         </div>
         <div class="adm-panel-h adm-mt">Manage</div>
         <div class="adm-chips">
-            <a class="adm-chip on" href="<?= e(admin_url('faq')) ?>">FAQ · <?= (int) $c['faqs'] ?></a>
-            <span class="adm-chip">Products · <?= (int) $c['products'] ?></span>
-            <span class="adm-chip">Articles · <?= (int) $c['posts'] ?></span>
+            <a class="adm-chip on" href="<?= e(admin_url('faq')) ?>"><i class="fa-solid fa-circle-question"></i> FAQ · <?= (int) $c['faqs'] ?></a>
+            <a class="adm-chip" href="<?= e(admin_url('products')) ?>"><i class="fa-solid fa-box"></i> Products · <?= (int) $c['products'] ?></a>
+            <a class="adm-chip" href="<?= e(admin_url('articles')) ?>"><i class="fa-solid fa-newspaper"></i> Articles · <?= (int) $c['posts'] ?></a>
         </div>
     </div>
 </div>
 
 <div class="adm-grid-2">
     <div class="adm-panel">
-        <div class="adm-panel-h">Recent orders <span class="adm-soon">Phase 2</span></div>
+        <div class="adm-panel-h">Recent orders <span class="adm-soon">Total</span></div>
         <?php if ($d['recent_orders']): ?>
             <ul class="adm-recent">
                 <?php foreach ($d['recent_orders'] as $o): ?>
@@ -70,7 +70,7 @@ $statusMeta = ['new' => 'New', 'contacted' => 'Contacted', 'completed' => 'Compl
         <?php else: ?><p class="adm-empty-sm">No orders yet.</p><?php endif; ?>
     </div>
     <div class="adm-panel">
-        <div class="adm-panel-h">Recent booking requests <span class="adm-soon">Phase 5</span></div>
+        <div class="adm-panel-h">Recent booking requests <span class="adm-soon">Date</span></div>
         <?php if ($d['recent_bookings']): ?>
             <ul class="adm-recent">
                 <?php foreach ($d['recent_bookings'] as $b): ?>
@@ -83,8 +83,6 @@ $statusMeta = ['new' => 'New', 'contacted' => 'Contacted', 'completed' => 'Compl
         <?php else: ?><p class="adm-empty-sm">No booking requests yet.</p><?php endif; ?>
     </div>
 </div>
-
-<p class="adm-note">Phase 1 is live (login, layout, FAQ). Orders, products and articles management arrive in the next phases.</p>
 
 <?php if (!empty($chart)): ?>
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>

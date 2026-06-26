@@ -1,7 +1,7 @@
 <?php /** Vars: $faqs */ ?>
 <div class="adm-head">
     <h1 class="adm-h1">FAQ</h1>
-    <a class="adm-btn adm-btn--primary" href="<?= e(admin_url('faq/new')) ?>">+ New question</a>
+    <a class="adm-btn adm-btn--primary" href="<?= e(admin_url('faq/new')) ?>"><i class="fa-solid fa-plus"></i> New question</a>
 </div>
 <?php if ($faqs): ?>
 <table class="adm-table">
@@ -16,10 +16,10 @@
             </td>
             <td><?= $f['is_active'] ? '<span class="adm-badge on">Active</span>' : '<span class="adm-badge off">Hidden</span>' ?></td>
             <td class="adm-row-actions">
-                <a href="<?= e(admin_url('faq/edit?id=' . $f['id'])) ?>">Edit</a>
+                <a class="adm-btn adm-btn--sm" href="<?= e(admin_url('faq/edit?id=' . $f['id'])) ?>"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                 <form method="post" action="<?= e(admin_url('faq/delete')) ?>" onsubmit="return confirm('Delete this FAQ?');">
                     <?= csrf_field() ?><input type="hidden" name="id" value="<?= (int) $f['id'] ?>">
-                    <button type="submit" class="adm-link-danger">Delete</button>
+                    <button type="submit" class="adm-link-danger"><i class="fa-solid fa-trash"></i></button>
                 </form>
             </td>
         </tr>
