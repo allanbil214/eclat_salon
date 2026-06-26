@@ -37,6 +37,8 @@
             <td class="adm-muted"><?= (int) $o['sort_order'] ?></td>
             <td class="adm-row-actions">
                 <a href="<?= e(admin_url('outlets/edit?id=' . $o['id'])) ?>">Edit</a>
+                <a href="<?= e(admin_url('outlets/services?outlet_id=' . $o['id'])) ?>">Services</a>
+                <a href="<?= e(admin_url('outlets/faq?outlet_id=' . $o['id'])) ?>">FAQs</a>
                 <form method="post" action="<?= e(admin_url('outlets/delete')) ?>" onsubmit="return confirm('Delete this outlet?');">
                     <?= csrf_field() ?>
                     <input type="hidden" name="id" value="<?= (int) $o['id'] ?>">

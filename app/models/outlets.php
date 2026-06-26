@@ -23,3 +23,23 @@ function get_all_outlets(): array {
 function get_outlet_by_id(int $id): ?array {
     return q1('SELECT * FROM outlets WHERE id = :id', ['id' => $id]);
 }
+
+/* ---------- outlet services ---------- */
+
+function get_outlet_services(int $outlet_id): array {
+    return q('SELECT * FROM outlet_services WHERE outlet_id = :oid ORDER BY sort_order ASC, id ASC', ['oid' => $outlet_id]);
+}
+
+function get_outlet_service(int $id): ?array {
+    return q1('SELECT * FROM outlet_services WHERE id = :id', ['id' => $id]);
+}
+
+/* ---------- outlet FAQs ---------- */
+
+function get_outlet_faqs(int $outlet_id): array {
+    return q('SELECT * FROM outlet_faq WHERE outlet_id = :oid ORDER BY sort_order ASC, id ASC', ['oid' => $outlet_id]);
+}
+
+function get_outlet_faq(int $id): ?array {
+    return q1('SELECT * FROM outlet_faq WHERE id = :id', ['id' => $id]);
+}
