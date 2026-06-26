@@ -36,7 +36,7 @@ $nav_url = (!empty($lat) && !empty($lng))
     ? 'https://www.google.com/maps/dir/?api=1&destination=' . urlencode($lat) . ',' . urlencode($lng)
     : $map_url;
 ?>
-<section class="section--tight section--alt<?= $section_class ? ' ' . e($section_class) : '' ?>">
+<section class="section--tight section--alt<?= $section_class ? ' ' . e($section_class) : '' ?>" style="padding-bottom:10px; padding-top:50px">
     <div class="container">
         <div class="section-head">
             <span class="eyebrow"><?= e($eyebrow) ?></span>
