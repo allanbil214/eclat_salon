@@ -109,6 +109,8 @@ $admin_routes = [
     '/outlets/faq/edit'             => 'outlets/faq/form',
     '/outlets/faq/save'             => 'outlets/faq/save',
     '/outlets/faq/delete'           => 'outlets/faq/delete',
+    '/outlets/hours'                => 'outlets/hours/index',
+    '/outlets/hours/save'           => 'outlets/hours/save',
 ];
 
 // Auth guard first (except the login screen) — guests never see the admin chrome.

@@ -1,13 +1,15 @@
-<?php /** Vars: $hours */ ?>
+<?php /** Vars: $outlet, $hours */ ?>
 <div class="adm-head">
     <div>
-        <h1 class="adm-h1">Opening Hours — Main Branch</h1>
-        <p class="adm-muted" style="margin:4px 0 0">Default hours for the main branch. Each outlet's specific hours are managed from the <a href="<?= e(admin_url('outlets')) ?>" style="color:var(--a-accent)">Outlets</a> page.</p>
+        <h1 class="adm-h1">Opening Hours — <?= e($outlet['name']) ?></h1>
+        <p class="adm-muted" style="margin:4px 0 0">Hours specific to this outlet. The main branch hours are managed under <a href="<?= e(admin_url('hours')) ?>" style="color:var(--a-accent)">Opening Hours</a>.</p>
     </div>
+    <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>">← Outlets</a>
 </div>
 
-<form method="post" action="<?= e(admin_url('hours/save')) ?>" class="adm-form adm-form--wide">
+<form method="post" action="<?= e(admin_url('outlets/hours/save')) ?>" class="adm-form adm-form--wide">
     <?= csrf_field() ?>
+    <input type="hidden" name="outlet_id" value="<?= (int) $outlet['id'] ?>">
 
     <table class="adm-table">
         <thead>
@@ -30,8 +32,9 @@
         </tbody>
     </table>
 
-    <p class="adm-note" style="margin-top:14px">Tick "Closed" for days the salon is shut — the times are ignored on those days.</p>
+    <p class="adm-note" style="margin-top:14px">Tick "Closed" for days this outlet is shut — the times are ignored on those days.</p>
     <div class="adm-form-actions">
         <button class="adm-btn adm-btn--primary" type="submit">Save hours</button>
+        <a class="adm-btn" href="<?= e(admin_url('outlets')) ?>">Cancel</a>
     </div>
 </form>
