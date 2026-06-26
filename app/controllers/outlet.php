@@ -20,4 +20,5 @@ render('outlet', [
     'today'          => get_outlet_today((int) $outlet['id']),
     'services'       => get_outlet_services_grouped((int) $outlet['id']),
     'faqs'           => get_outlet_faqs_grouped((int) $outlet['id']),
+    'other_outlets'  => get_other_outlets((int) $outlet['id']),
 ]);
