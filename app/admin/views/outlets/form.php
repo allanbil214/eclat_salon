@@ -41,13 +41,13 @@ $x = $o ?? ['id'=>0,'name'=>'','slug'=>'','city'=>'','tagline'=>'','description'
         <div class="adm-map-coords">
             <label class="adm-field adm-field--sm">
                 <span>Latitude</span>
-                <input type="number" name="lat" step="0.0000001" placeholder="e.g. -6.2088"
+                <input type="number" name="lat" step="any" placeholder="e.g. -6.2088"
                     value="<?= ($x['lat'] !== null && $x['lat'] !== '') ? e($x['lat']) : '' ?>"
                     data-lat-input>
             </label>
             <label class="adm-field adm-field--sm">
                 <span>Longitude</span>
-                <input type="number" name="lng" step="0.0000001" placeholder="e.g. 106.8456"
+                <input type="number" name="lng" step="any" placeholder="e.g. 106.8456"
                     value="<?= ($x['lng'] !== null && $x['lng'] !== '') ? e($x['lng']) : '' ?>"
                     data-lng-input>
             </label>

@@ -9,6 +9,7 @@ $adm_theme = (($_COOKIE['adm_theme'] ?? 'light') === 'dark') ? 'dark' : 'light';
     <meta name="robots" content="noindex, nofollow">
     <meta name="csrf" content="<?= e(csrf_token()) ?>">
     <meta name="upload-url" content="<?= e(admin_url('upload')) ?>">
+    <script>window.ADMIN_BASE = <?= json_encode(rtrim(admin_url(), '/')) ?>;</script>
     <title><?= e(($title ?? 'Admin') . ' — ÉCLAT Admin') ?></title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
